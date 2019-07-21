@@ -10,21 +10,6 @@
 
 using namespace std;
 
-__global__  void Multiply(int ** a, int ** b, int ** c, int ID) {
-    
-    int ini = (int)(SIZE/omp_get_num_threads())*ID;
-	int fin = (int)(SIZE/omp_get_num_threads())+ini;
-	for (int i = ini ; i < fin ;i++ ) {
-		for (int j = 0 ; j < SIZE ; j++) {
-			for (int k = 0; k < SIZE; k++) {
-				c[i][j] += a[i][k] * b[k][j];
-			}
-		}
-	}
-}
-
-
-
 int main(int argc, char **argv)
 {
     //define variables
