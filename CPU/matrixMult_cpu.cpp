@@ -1,93 +1,103 @@
-
 #include <stdlib.h>
-#include <cstdint>
 #include <omp.h>
 #include <stdio.h>
 #include <string.h>
 
-using namespace std;
-//global variables
-int **A;
-int **B;
-int **R;
-int N;
-int HILOS;
+// Global variables
+int A[1024][1024];
+int B[1024][1024];
+int C[1024][1024];
 
-int main(int argc, char **argv)
-{
-   if ( argc !=  5)
-    {
-        printf("usage: ./matrixMult MatA.csv MatB.csv <N> <HILOS>\n");
-        return -1;
+void readMatrix(char *filename, int M[][1024], int N){
+    FILE *fstream = fopen(filename, "r");
+    if(fstream == NULL){
+        printf("\n file opening failed ");
+        return;
     }
-   char buffer[1024] ;
-   char *record,*line;
-   int i=0,j=0;
-   int mat[8][8];
-   //printf("%s",argv[1]);
-   FILE *fstream = fopen(argv[1],"r");
-   if(fstream == NULL)
-   {
-      printf("\n file opening failed ");
-      return -1 ;
-   }
-   while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL)
-   {
-     j = 0;
-     record = strtok(line,",");
-     while(record != NULL)
-     {
-     A[i][j++] = atoi(record) ;
-     //printf("%d ",mat[i][j]);
-     record = strtok(NULL,",");
-     }
-     ++i ;
-   }
-   i=0;
-   j=0;
-   fstream = fopen(argv[2],"r");
-   if(fstream == NULL)
-   {
-      printf("\n file opening failed ");
-      return -1 ;
-   }
-   while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL)
-   {
-     j = 0;
-     record = strtok(line,",");
-     while(record != NULL)
-     {
-     B[i][j++] = atoi(record) ;
-     //printf("%d ",mat[i][j]);
-     record = strtok(NULL,",");
-     }
-     ++i ;
-   }
-
-    N = atoi(argv[3]);
-    HILOS = atoi(argv[4]);
-   // create result matrix
-   #pragma omp parallel num_threads(HILOS)
-    {
-        int tn = omp_get_thread_num();
-        int ini = (int)(N/HILOS)*(tn-1);
-        int fin = (int)(N/HILOS)+ini;
-        printf("thread %d inicio: %d fin : %d \n",tn,ini,fin);
+    char *record,*line;
+    char buffer[1024];
+    int i=0,j=0;
+    while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL){
+        j = 0;
+        record = strtok(line,",");
+        while(record != NULL){
+            M[i][j++] = atoi(record);
+            record = strtok(NULL,",");
+        }
+        ++i;
     }
+}
 
-
+void printMatrix(int M[][1024], int N){
     // print matrix for testing
-    for (int h = 0; h < N; h++)
-    {
-        for (int k = 0; k < N; k++)
-        {
-            printf("%d ",R[h][k]);
+    int i;
+    int j;
+    for(i = 0; i < N; i++){
+        for(j = 0; j < N; j++){
+            printf("%d ",M[i][j]);
         }
         printf("\n");
     }
+    printf("\n");
+}
+
+void multiplyMatrix(int A[][1024], int B[][1024], int C[][1024], int ini, int fin) 
+{ 
+    int i, j, k; 
+    for (i = ini; i < fin; i++) { 
+        for (j = 0; j < 1024; j++) { 
+            C[i][j] = 0; 
+            for (k = 0; k < 1024; k++) 
+                C[i][j] += A[i][k]*B[k][j]; 
+        } 
+    } 
+}
+
+void writeMatrix(char *filename, int R[][1024], int N){
+    FILE *fp;
+    int i,j;
+    fp=fopen(filename,"w+");
+    for(i=0 ; i<N; i++){
+        for(j=0; j<N; j++){
+            fprintf(fp,",%d ",R[i][j]);
+        }
+        fprintf(fp,"\n%d",i+1);
+    }
+    fclose(fp);
+}
+
+int main(int argc, char **argv){
+    // Arguments
+    if ( argc !=  5){
+        printf("usage: ./matrixMult MatA.csv MatB.csv N H\n");
+        return -1;
+    }
+    char* fileA = argv[1];
+    char* fileB = argv[2];
+    int N = atoi(argv[3]);
+    int H = atoi(argv[4]);    
+
+    // Read matrix A and B
+    readMatrix(fileA, A, N);
+    readMatrix(fileB, B, N);
+
+    // Print matrix A and B
+    printMatrix(A, N);
+    printMatrix(B, N);
     
-   //write the matrix
+    // Obtain and print matrix C
+    #pragma omp parallel num_threads(H)
+    {
+        int tn = omp_get_thread_num();
+        int ini = (int)(N/H)*(tn);
+        int fin = (int)(N/H)+ini;
+        multiplyMatrix(A, B, C,ini,fin);
+    }
+    //multiplyMatrix(A, B, C);      
+    printMatrix(C, N);
 
-
+    // Write the matrix
+    writeMatrix("../Resultados/result.csv", C, N);
+    
     return 0;
 }
