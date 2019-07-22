@@ -109,7 +109,7 @@ int main(int argc, char **argv)
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
     {
-        printf(" %d",h_c[n*i+j) ;
+        printf(" %d",h_c[n*i+j]) ;
         if(j == n-1)
            printf("\n");
     }
