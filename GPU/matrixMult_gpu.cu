@@ -78,9 +78,9 @@ __global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
     if(tn <*N){
         for (i = ini; i < fin; i++) { 
             for (j = 0; j < 1024; j++) { 
-                C[i][j] = 0; 
+                C[(i*N)+j] = 0; 
                 for (k = 0; k < 1024; k++) 
-                    C[i][j] += A[i][k]*B[k][j]; 
+                    C[(i*N)+j] += A[(i*N)+k]*B[(k*N)+j]; 
             } 
         }
     }
