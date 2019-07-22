@@ -211,13 +211,13 @@ int main(int argc, char **argv){
     //Launch Kernel
 
     multiplyMat<<<1,H>>>(d_A,d_B, d_C, d_H, d_N);
-    /* #pragma omp parallel num_threads(H)
-    {
-        int tn = omp_get_thread_num();
-        int ini = (int)(N/H)*(tn);
-        int fin = (int)(N/H)+ini;
-        multiplyMatrix(A, B, C,ini,fin);
-    } */ 
+
+    error = cudaGetLastError();
+    if (error != cudaSuccess){
+        fprintf(stderr, "Failed to launch multiplyMatrix (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+
 
     // Memcpy : Device to Host
 
