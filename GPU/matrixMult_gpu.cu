@@ -80,7 +80,7 @@ __global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
             for (j = 0; j < *N; j++) { 
                 C[(i * *N) +j] = 0; 
                 for (k = 0; k < *N; k++)
-                    if(tn==0) printf("multiplying %d  with  %d \n",A[(i * *N) +k],B[(k * *N) +j]);
+                    //if(tn==0) printf("multiplying %d  with  %d \n",A[(i * *N) +k],B[(k * *N) +j]);
                     C[(i * *N) +j] += A[(i * *N) +k]*B[(k * *N) +j]; 
             } 
         }
