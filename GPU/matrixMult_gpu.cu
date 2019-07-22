@@ -68,7 +68,7 @@ void writeMatrix(char *filename, int R[][1024], int N){
     fclose(fp);
 }
 
-__global__ void multiplyMat(int *N,int *H){
+__global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
     int tn = (blockDim.x * blockIdx.x) + threadIdx.x;
     
     int ini = (int)((int)*N/(int)*H)*(tn);
@@ -149,6 +149,16 @@ int main(int argc, char **argv){
         fprintf(stderr, "Failed to allocate mem for d_C (error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
     }
+    error = cudaMalloc(&d_N,sizeof(int));
+     if (error != cudaSuccess){
+        fprintf(stderr, "Failed to allocate mem for d_N (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    error = cudaMalloc(&d_H,sizeof(int));
+     if (error != cudaSuccess){
+        fprintf(stderr, "Failed to allocate mem for d_H (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
     /**************set initial values****************/
 
     // Read matrix A and B
@@ -169,24 +179,38 @@ int main(int argc, char **argv){
   
     //Memcpy: Host to device
 
-    error = cudaMemcpy(d_A, &h_A, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    error = cudaMemcpy(d_A, h_A, N*N*sizeof(int), cudaMemcpyHostToDevice);
     if (error != cudaSuccess){
         fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
     }
-    error = cudaMemcpy(d_B, &h_B, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    error = cudaMemcpy(d_B, h_B, N*N*sizeof(int), cudaMemcpyHostToDevice);
     if (error != cudaSuccess){
         fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
     }
-    error = cudaMemcpy(d_C, &h_C, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    error = cudaMemcpy(d_C, h_C, N*N*sizeof(int), cudaMemcpyHostToDevice);
     if (error != cudaSuccess){
         fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
     }
+    error = cudaMemcpy(d_H, &H, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    if (error != cudaSuccess){
+        fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    error = cudaMemcpy(d_N, &N, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    if (error != cudaSuccess){
+        fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+
+    //Blocks and threads definition
+
 
     //Launch Kernel
 
+    multiplyMat<<<1,H>>>(d_A,d_B, d_C, d_H, d_N);
     /* #pragma omp parallel num_threads(H)
     {
         int tn = omp_get_thread_num();
@@ -196,6 +220,18 @@ int main(int argc, char **argv){
     } */ 
 
     // Memcpy : Device to Host
+
+
+    error = cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
+     if (error != cudaSuccess){
+        fprintf(stderr, "Failed to  to copy from device (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    for(int i=0;i<N;i++){
+        for(int j=0;j<N;j+){
+            C[i][j]=h_C[(i*N)+j];
+        }
+    }
 
     //print results
     printMatrix(C, N);
