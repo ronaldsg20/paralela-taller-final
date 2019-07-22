@@ -85,7 +85,7 @@ int main(int argc, char **argv)
     multiplication2(h_a,h_b,h_c2,n);
     //Copy  data  device to host
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
-    
+    printf("hola");
     printf("%d %d\n",h_c[0],h_c2[0]);
     // free memory
 
