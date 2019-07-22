@@ -24,7 +24,7 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
     c[row*n+col]=partial;
 }
 
-void  multiplicacion2(int* a,int* b,int* c,int  size){
+void  multiplication2(int* a,int* b,int* c,int  size){
     for(int i=0;i<size;i++){
         for(int   j=0;j<size;i++){
             for(int k=0;k<size;k++){
@@ -86,7 +86,8 @@ int main(int argc, char **argv)
 
     //Copy  data  device to host
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
-    multiplicacion2(h_a,h_b,h_c2,n);
+    multiplication(h_a,h_b,h_c2,n);
+    printf("%d %d\n",h_c[0],h_c2[0])
     // free memory
 
     cudaFree(d_a);
@@ -95,6 +96,7 @@ int main(int argc, char **argv)
     free(h_a);
     free(h_b);
     free(h_c);
+    free(h_c2);
 
     
     
