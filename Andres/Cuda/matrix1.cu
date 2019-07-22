@@ -44,6 +44,11 @@ int main(int argc, char **argv)
     
     //define variables
     int  n  = atoi(argv[1]);
+
+    cudaSetDevice(0);
+    cudaDeviceProp deviceProp;
+    cudaGetDeviceProperties(&deviceProp,0);
+
     int blocks = deviceProp.multiProcessorCount;
     int threads= n/blocks;
     //Host matrix
@@ -84,7 +89,7 @@ int main(int argc, char **argv)
 
     //Write blocks  and threads
     
-    dim3 block_size(threads_block,threads_block);
+    //dim3 block_size(threads_block,threads_block);
       //<<<Bloques,hilos>>>
     
     multiplication  <<<blocks,threads>>> (d_a,d_b,d_c,n,threads_block);
