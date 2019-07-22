@@ -23,7 +23,7 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
 
     c[row*n+col]=partial;
 }
-void  multiplication2(int* a,int* b,int* c,int  size){
+__host__  void  multiplication2(int* a,int* b,int* c,int  size){
     for(int i=0;i<size;i++){
         for(int   j=0;j<size;i++){
             for(int k=0;k<size;k++){
