@@ -92,7 +92,7 @@ int main(int argc, char **argv)
     //dim3 block_size(threads_block,threads_block);
       //<<<Bloques,hilos>>>
     
-    multiplication  <<<blocks,threads>>> (d_a,d_b,d_c,n,threads_block);
+    multiplication  <<<blocks,threads>>> (d_a,d_b,d_c,n,threads);
     //multiplication2(h_a,h_b,h_c_s,n);
   
     //Copy  data  device to host
