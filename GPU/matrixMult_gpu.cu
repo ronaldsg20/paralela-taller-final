@@ -15,11 +15,7 @@ void readMatrix(char *filename, int **M, int N){
     if(fstream == NULL){
         printf("\n file opening failed ");
         return;
-    }
-
-    M = (int **)malloc(rows * sizeof(int*));
-    for(int i = 0; i < rows; i++) mat[i] = (int *)malloc(cols * sizeof(int));
-    
+    } 
     char *record,*line;
     char buffer[1024];
     int i=0,j=0;
@@ -94,9 +90,12 @@ __global__ void multiplyMat(int *N,int *H){
 
 int main(int argc, char **argv){
 
-    int A[1024][1024];
-    int B[1024][1024];
-    int C[1024][1024];
+    int **C;
+    int **A;
+    int **B;
+    int *h_A;
+    int *h_B;
+    int *h_C;
     //Handle errors
     cudaError_t error = cudaSuccess;
 
@@ -117,26 +116,74 @@ int main(int argc, char **argv){
     int *d_C;
     int *d_A;
     int *d_B;
-
-    // Read matrix A and B
-    readMatrix(fileA, A, N);
-    readMatrix(fileB, B, N);
-
-    // Print matrix A and B
-    printMatrix(A, N);
-    printMatrix(B, N);
-    
+  
     // GPU data
     cudaSetDevice(0);
     cudaDeviceProp deviceProp;
     cudaGetDeviceProperties(&deviceProp,0);
 
     // malloc and cudaMalloc
+    A = (int **)malloc(N * sizeof(int*));
+    for(int i = 0; i < N; i++) A[i] = (int *)malloc(N * sizeof(int));
+    B = (int **)malloc(N * sizeof(int*));
+    for(int i = 0; i < N; i++) B[i] = (int *)malloc(N * sizeof(int));
+    C = (int **)malloc(N * sizeof(int*));
+    for(int i = 0; i < N; i++) C[i] = (int *)malloc(N * sizeof(int));
 
+    h_A = (int *)malloc(N*N*sizeof(int));
+    h_B = (int *)malloc(N*N*sizeof(int));
+    h_C = (int *)malloc(N*N*sizeof(int));
 
-    //set initial values
+    error = cudaMalloc(&d_A,N*N*sizeof(int));
+     if (error != cudaSuccess){
+        fprintf(stderr, "Failed to allocate mem for d_A (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    error = cudaMalloc(&d_B,N*N*sizeof(int));
+     if (error != cudaSuccess){
+        fprintf(stderr, "Failed to allocate mem for d_B (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    error = cudaMalloc(&d_C,N*N*sizeof(int));
+     if (error != cudaSuccess){
+        fprintf(stderr, "Failed to allocate mem for d_C (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    /**************set initial values****************/
 
+    // Read matrix A and B
+    readMatrix(fileA, A, N);
+    readMatrix(fileB, B, N);
+
+    // write A and B on array
+    for(int i=0;i<N;i++){
+        for(int j=0;j<N;j+){
+            h_A[(i*N)+j]=A[i][j];
+            h_B[(i*N)+j]=B[i][j];
+        }
+    }
+
+    // Print matrix A and B
+    printMatrix(A, N);
+    printMatrix(B, N);
+  
     //Memcpy: Host to device
+
+    error = cudaMemcpy(d_A, &h_A, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    if (error != cudaSuccess){
+        fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    error = cudaMemcpy(d_B, &h_B, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    if (error != cudaSuccess){
+        fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+    error = cudaMemcpy(d_C, &h_C, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    if (error != cudaSuccess){
+        fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
 
     //Launch Kernel
 
@@ -156,5 +203,17 @@ int main(int argc, char **argv){
     // Write the matrix
     writeMatrix("result.csv", C, N);
     
+    // free memory
+    
+    cudaFree(d_N);
+    cudaFree(d_H);
+    cudaFree(d_C);
+    cudaFree(d_A);
+    cudaFree(d_B);
+
+    free(h_A);
+    free(h_B);
+    free(h_C);
+
     return 0;
 }
