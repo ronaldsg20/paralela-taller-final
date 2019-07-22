@@ -38,7 +38,8 @@ int main(int argc, char **argv)
 {
     
     //define variables
-    int  n  = 1024;
+    int  n  = atoi(argv[1]);
+    int threads_block =  atoi(argv[2]);
     //Host matrix
     int* h_a;
     int* h_b;
@@ -76,7 +77,7 @@ int main(int argc, char **argv)
     cudaMemcpy(d_b,h_b,bytes,cudaMemcpyHostToDevice);
 
     //Write blocks  and threads
-    int threads_block =  2;
+    
     dim3 block_size(threads_block,threads_block);
     dim3 grid_size(n/block_size.x,n/block_size.y);
       //<<<Bloques,hilos>>>
