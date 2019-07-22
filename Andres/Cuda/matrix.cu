@@ -80,7 +80,6 @@ int main(int argc, char **argv)
     dim3 block_size(threads_block,threads_block);
     dim3 grid_size(n/block_size.x,n/block_size.y);
 
-    printf("Grid  size  X: %d Grid  size Y:  %d\n",grid_size.x,grid_size.y);
       //<<<Bloques,hilos>>>
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
     multiplication2(h_a,h_b,h_c2,n);
