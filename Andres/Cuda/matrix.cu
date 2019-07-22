@@ -70,7 +70,7 @@ int main(int argc, char **argv)
     //multiplication  <<<,>>> (d_a,d_b,d_c,n)
 
     //Copy  data  device to host
-    cudaMemcpy(h_a,d_p,bytes,cudaMemcpyDeviceToHost);
+    cudaMemcpy(h_a,d_c,bytes,cudaMemcpyDeviceToHost);
 
 
     
