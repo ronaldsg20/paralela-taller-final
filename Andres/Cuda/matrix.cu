@@ -89,28 +89,28 @@ int main(int argc, char **argv)
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
  
     cout << endl << "Output Matrix: " << endl;
-    for(int i = 0; i <SIZE; ++i)
-    for(int j = 0; j < SIZE; ++j)
+    for(int i = 0; i <n; ++i)
+    for(int j = 0; j < n; ++j)
     {
         cout << " " << a[i][j];
-        if(j == SIZE-1)
+        if(j == n-1)
             cout << endl;
     }
 
     cout<<endl;
-    for(int i = 0; i <SIZE; ++i)
-    for(int j = 0; j < SIZE; ++j)
+    for(int i = 0; i <n; ++i)
+    for(int j = 0; j < n; ++j)
     {
         cout << " " << b[i][j];
-        if(j == SIZE-1)
+        if(j == n-1)
             cout << endl;
     }
     cout<<endl;
-    for(int i = 0; i <SIZE; ++i)
-    for(int j = 0; j < SIZE; ++j)
+    for(int i = 0; i <n; ++i)
+    for(int j = 0; j < n; ++j)
     {
         cout << " " << c[i][j];
-        if(j == SIZE-1)
+        if(j == n-1)
             cout << endl;
     }
     cout<<endl;
