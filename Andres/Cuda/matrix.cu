@@ -1,102 +1,78 @@
 //BLOCKWISE
-#include <iostream>
 #include "omp.h"
+#include <stdio.h>
+#include <stdlib.h>
+//For  CUDA
+#include <cuda.h>
+#include <helper_cuda.h>
+#include <cuda_runtime.h>
 
 
 using namespace std;
-//global variables
-int  SIZE,THREADS;
 
-int ** randomMatrix () {
-	int **result = new int *[SIZE] ;
+__global__ void multiplication(int*  a,int* b,int*  c,int n){
+    //Calculate row and column
+    //int r =blockIdx.y*blockDim.y+threadIdx.y
+    int row = (blockDim.y * blockIdx.y) + threadIdx.y;
+    int col= (blockDim.x * blockIdx.x) + threadIdx.x;
+    int partial=0;
 
-	for (int i = 0; i < SIZE; i++) {
-		result[i] = new int [SIZE] ;
+    for(int i=0;i<n;i++){
+        partial  += a[row * n +i] * b[i*n+col];
+    }
 
-		for (int j = 0; j < SIZE; j++)
-			result[i][j] = rand()%6;
-	}
-
-	return result;
+    c[row*n+col]=partial;
 }
-
-void Multiply(int ** a, int ** b, int ** c, int ID) {
-    
-    int ini = (int)(SIZE/omp_get_num_threads())*ID;
-	int fin = (int)(SIZE/omp_get_num_threads())+ini;
-	for (int i = ini ; i < fin ;i++ ) {
-		for (int j = 0 ; j < SIZE ; j++) {
-			for (int k = 0; k < SIZE; k++) {
-				c[i][j] += a[i][k] * b[k][j];
-			}
-		}
-	}
-}
-
-
 
 int main(int argc, char **argv)
 {
-     // read arguments
-    if ( argc != 3 )
-    {
-        printf("usage: ./matrix  <SIZE> <THREADS>\n");
-        return -1;
-    }
-    
-    SIZE =atoi(argv[1]);
-    THREADS = atoi(argv[2]);
+    //define variables
+    int  n  = 16;
+    //Host matrix
+    int* h_a;
+    int* h_b;
+    int* h_c;
 
-   
-    int **a=new int*[SIZE];
-    int **b=new int*[SIZE];
-    int **c=new int*[SIZE];
+    //Device  matrix
+    int* d_a;
+    int* d_b;
+    int* d_c;
 
-    a=randomMatrix();
-    b=randomMatrix();
+    size_t  bytes = n*n*sizeof(int);
 
-    for (int i = 0; i < SIZE; i++) {
-		c[i] = new int [SIZE] ;
+    //Allocate memory in host
+    h_a =(int*)malloc(bytes);
+    h_b =(int*)malloc(bytes);
+    h_c =(int*)malloc(bytes);
 
-		for (int j = 0; j < SIZE; j++){
-            c[i][j] = 0;
+    //Initialize matrix
+    for (int i=0;i<n;i++){
+        for(int  j=0;j<n;j++){
+            h_a[i*n+j]  =  rand()%10;
+            h_b[i*n+j]  =  rand()%10;
         }
-			
-	}
-
-   #pragma omp parallel num_threads(THREADS)
-	{
-		int ID = omp_get_thread_num();
-		Multiply(a, b, c, ID);
-	}
-   // Displaying the multiplication of two matrix.
-   cout << endl << "Output Matrix: " << endl;
-    for(int i = 0; i <SIZE; ++i)
-    for(int j = 0; j < SIZE; ++j)
-    {
-        cout << " " << a[i][j];
-        if(j == SIZE-1)
-            cout << endl;
     }
 
-    cout<<endl;
-    for(int i = 0; i <SIZE; ++i)
-    for(int j = 0; j < SIZE; ++j)
-    {
-        cout << " " << b[i][j];
-        if(j == SIZE-1)
-            cout << endl;
-    }
-    cout<<endl;
-    for(int i = 0; i <SIZE; ++i)
-    for(int j = 0; j < SIZE; ++j)
-    {
-        cout << " " << c[i][j];
-        if(j == SIZE-1)
-            cout << endl;
-    }
-    cout<<endl; 
-  
+    //Allocate memory  in device
+    cudaMalloc(&d_a,bytes);
+    cudaMalloc(&d_b,bytes);
+    cudaMalloc(&d_c,bytes);
+
+    //Copy  data  host to   device
+    cudaMemcpy(d_a,h_a,bytes,cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b,h_b,bytes,cudaMemcpyHostToDevice);
+
+    //Write blocks  and threads
+    int threads_block =  16;
+    dim3 block_size(threads_block,threads_block);
+    dim3 grid_size(n/block_size.x,n/block_size.y);
+
+    multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
+
+    //Copy  data  device to host
+    cudaMemcpy(h_a,d_c,bytes,cudaMemcpyDeviceToHost);
+
+
     
     
     return 0;
