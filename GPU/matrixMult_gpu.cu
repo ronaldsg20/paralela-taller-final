@@ -107,8 +107,8 @@ int main(int argc, char **argv){
     cudaError_t error = cudaSuccess;
 
     // Arguments
-    if ( argc !=  5){
-        printf("usage: ./matrixMult_gpu MatA.csv MatB.csv N H\n");
+    if ( argc !=  7){
+        printf("usage: ./matrixMult_gpu <MatA.csv> <MatB.csv> <N> <THREADSxBLOCK> <BLOCKS> <PATH-TO-MatC.csv> \n");
         return -1;
     }
     char* fileA = argv[1];
@@ -213,11 +213,11 @@ int main(int argc, char **argv){
     }
 
     //Blocks and threads definition
-
+    int blocks = atoi(argv[5]);
 
     //Launch Kernel
 
-    multiplyMat<<<1,H>>>(d_A,d_B, d_C, d_H, d_N);
+    multiplyMat<<<blocks,H>>>(d_A,d_B, d_C, d_H, d_N);
 
     error = cudaGetLastError();
     if (error != cudaSuccess){
@@ -244,7 +244,7 @@ int main(int argc, char **argv){
     printMatrix(C, N);
 
     // Write the matrix
-    writeMatrix("result.csv", C, N);
+    writeMatrix(argv[6], C, N);
     
     // free memory
     
