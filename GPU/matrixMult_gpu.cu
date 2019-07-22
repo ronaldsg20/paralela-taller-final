@@ -79,7 +79,6 @@ __global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
         ini = tn;
         fin = tn+1;
     }
-    printf("Thread : %d - ini: %d - fin: %d \n",tn,ini,fin);
     int i, j, k; 
     if(tn <*N){
         for (i = ini; i < fin; i++) { 
@@ -181,8 +180,8 @@ int main(int argc, char **argv){
     }
 
     // Print matrix A and B
-    printMatrix(A, N);
-    printMatrix(B, N);
+    /* printMatrix(A, N);
+    printMatrix(B, N); */
   
     //Memcpy: Host to device
 
@@ -241,7 +240,7 @@ int main(int argc, char **argv){
     }
 
     //print results
-    printMatrix(C, N);
+    /* printMatrix(C, N); */
 
     // Write the matrix
     writeMatrix(argv[6], C, N);
