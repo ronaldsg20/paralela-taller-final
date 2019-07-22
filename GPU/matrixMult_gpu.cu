@@ -30,7 +30,7 @@ void readMatrix(char *filename, int **M, int N){
     }
 }
 
-void printMatrix(int M[][1024], int N){
+void printMatrix(int **M, int N){
     // print matrix for testing
     int i;
     int j;
@@ -55,7 +55,7 @@ void multiplyMatrix(int A[][1024], int B[][1024], int C[][1024], int ini, int fi
     } 
 }
 
-void writeMatrix(char *filename, int R[][1024], int N){
+void writeMatrix(char *filename, int **R, int N){
     FILE *fp;
     int i,j;
     fp=fopen(filename,"w+");
@@ -78,9 +78,9 @@ __global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
     if(tn <*N){
         for (i = ini; i < fin; i++) { 
             for (j = 0; j < 1024; j++) { 
-                C[(i*N)+j] = 0; 
+                C[(i * *N) +j] = 0; 
                 for (k = 0; k < 1024; k++) 
-                    C[(i*N)+j] += A[(i*N)+k]*B[(k*N)+j]; 
+                    C[(i * *N) +j] += A[(i * *N) +k]*B[(k * *N) +j]; 
             } 
         }
     }
@@ -167,7 +167,7 @@ int main(int argc, char **argv){
 
     // write A and B on array
     for(int i=0;i<N;i++){
-        for(int j=0;j<N;j+){
+        for(int j=0;j<N;j++){
             h_A[(i*N)+j]=A[i][j];
             h_B[(i*N)+j]=B[i][j];
         }
@@ -194,12 +194,12 @@ int main(int argc, char **argv){
         fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
     }
-    error = cudaMemcpy(d_H, &H, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    error = cudaMemcpy(d_H, &H, sizeof(int), cudaMemcpyHostToDevice);
     if (error != cudaSuccess){
         fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
     }
-    error = cudaMemcpy(d_N, &N, N*N*sizeof(int), cudaMemcpyHostToDevice);
+    error = cudaMemcpy(d_N, &N, sizeof(int), cudaMemcpyHostToDevice);
     if (error != cudaSuccess){
         fprintf(stderr, "Failed to  to copy on device(error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
@@ -211,24 +211,24 @@ int main(int argc, char **argv){
     //Launch Kernel
 
     multiplyMat<<<1,H>>>(d_A,d_B, d_C, d_H, d_N);
-    /* #pragma omp parallel num_threads(H)
-    {
-        int tn = omp_get_thread_num();
-        int ini = (int)(N/H)*(tn);
-        int fin = (int)(N/H)+ini;
-        multiplyMatrix(A, B, C,ini,fin);
-    } */ 
+
+    error = cudaGetLastError();
+    if (error != cudaSuccess){
+        fprintf(stderr, "Failed to launch multiplyMatrix (error code %s)!\n", cudaGetErrorString(error));
+        exit(EXIT_FAILURE);
+    }
+
 
     // Memcpy : Device to Host
 
 
-    error = cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
+    error = cudaMemcpy(h_C, d_C, N*N*sizeof(int), cudaMemcpyDeviceToHost);
      if (error != cudaSuccess){
         fprintf(stderr, "Failed to  to copy from device (error code %s)!\n", cudaGetErrorString(error));
         exit(EXIT_FAILURE);
     }
     for(int i=0;i<N;i++){
-        for(int j=0;j<N;j+){
+        for(int j=0;j<N;j++){
             C[i][j]=h_C[(i*N)+j];
         }
     }
