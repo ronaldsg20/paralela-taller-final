@@ -19,12 +19,11 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
     int fin = n/(int)*block_size)+ini;
 
     int i, j, k; 
-    if(tn <*N){
+    if(tn <n){
         for (i = ini; i < fin; i++) { 
             for (j = 0; j < n; j++) { 
-                C[i][j] = 0; 
                 for (k = 0; k < n; k++) 
-                    C[i][j] += A[i][k]*B[k][j]; 
+                    c[i][j] += a[i][k]*b[k][j]; 
             } 
         }
     }
