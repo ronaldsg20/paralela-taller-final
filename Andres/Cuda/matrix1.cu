@@ -13,15 +13,20 @@ using namespace std;
 __global__ void multiplication(int*  a,int* b,int*  c,int n){
     //Calculate row and column
     //int r =blockIdx.y*blockDim.y+threadIdx.y
-    int row = (blockDim.y * blockIdx.y) + threadIdx.y;
-    int col= (blockDim.x * blockIdx.x) + threadIdx.x;
-    int partial=0;
+    int tn = (blockDim.x * blockIdx.x) + threadIdx.x;
+    
+    int ini = n/block_size*(tn);
+    int fin = n/block_size+ini;
 
-    for(int i=0;i<n;i++){
-        partial  += a[row * n +i] * b[i*n+col];
+    int i, j, k; 
+    if(tn <n){
+        for (i = ini; i < fin; i++) { 
+            for (j = 0; j < n; j++) { 
+                for (k = 0; k < n; k++) 
+                    c[i][j] += a[i][k]*b[k][j]; 
+            } 
+        }
     }
-
-    c[row*n+col]=partial;
 }
 /*__host__  void  multiplication2(int* a,int* b,int* c,int  size){
     for(int i=0;i<size;i++){
