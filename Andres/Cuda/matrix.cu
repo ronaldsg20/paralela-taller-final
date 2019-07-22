@@ -81,8 +81,9 @@ int main(int argc, char **argv)
     dim3 grid_size(n/block_size.x,n/block_size.y);
     printf("Aqui");
       //<<<Bloques,hilos>>>
-    multiplication2(h_a,h_b,h_c_s,n);
+    
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
+    multiplication2(h_a,h_b,h_c_s,n);
   
     //Copy  data  device to host
     printf("hola1");
