@@ -21,7 +21,7 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
         partial  += a[row * n +i] * b[i*n+col];
     }
 
-    c[row*n+c]=partial;
+    c[row*n+col]=partial;
 }
 
 int main(int argc, char **argv)
