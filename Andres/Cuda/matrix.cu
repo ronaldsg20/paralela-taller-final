@@ -74,7 +74,7 @@ int main(int argc, char **argv)
     printf("Aqui");
       //<<<Bloques,hilos>>>
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
-    multiplication2(h_a,h_b,h_c2,n);
+   
     //Copy  data  device to host
     printf("hola1");
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
