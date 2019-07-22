@@ -69,10 +69,16 @@ void writeMatrix(char *filename, int **R, int N){
 }
 
 __global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
+    int tn,ini,fin;
+    tn = (blockDim.x * blockIdx.x) + threadIdx.x;
 
-    int tn = (blockDim.x * blockIdx.x) + threadIdx.x;
-    int ini = (int)((int)*N/(int)*H)*(tn);
-    int fin = (int)((int)*N/(int)*H)+ini;
+    if(*H<=*N){
+        ini = (int)((int)*N/(int)*H)*(tn);
+        fin = (int)((int)*N/(int)*H)+ini;
+    }else{
+        ini = tn;
+        fin = tn+1;
+    }
     printf("Thread : %d - ini: %d - fin: %d \n",tn,ini,fin);
     int i, j, k; 
     if(tn <*N){
