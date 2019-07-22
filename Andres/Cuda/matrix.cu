@@ -64,10 +64,10 @@ int main(int argc, char **argv)
 
     //Write blocks  and threads
     int threads_block =  16;
-    dim3 block_size = (threads_block,threads_block);
-    dim3 grid_size = (n/block_size.x,n/block_size.y);
+    dim3 block_size(threads_block,threads_block);
+    dim3 grid_size(n/block_size.x,n/block_size.y);
 
-    //multiplication  <<<,>>> (d_a,d_b,d_c,n)
+    multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
 
     //Copy  data  device to host
     cudaMemcpy(h_a,d_c,bytes,cudaMemcpyDeviceToHost);
