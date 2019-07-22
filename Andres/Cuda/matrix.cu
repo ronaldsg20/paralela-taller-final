@@ -23,7 +23,7 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
 
     c[row*n+col]=partial;
 }
-__host__  void  multiplication2(int* a,int* b,int* c,int  size){
+/*__host__  void  multiplication2(int* a,int* b,int* c,int  size){
     for(int i=0;i<size;i++){
         for(int   j=0;j<size;i++){
             for(int k=0;k<size;k++){
@@ -31,7 +31,7 @@ __host__  void  multiplication2(int* a,int* b,int* c,int  size){
             }
         }
     }
-}
+}*/
 
 
 int main(int argc, char **argv)
@@ -43,7 +43,7 @@ int main(int argc, char **argv)
     int* h_a;
     int* h_b;
     int* h_c;
-    int* h_c_s;
+    //int* h_c_s;
 
     //Device  matrix
     int* d_a;
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     h_a =(int*)malloc(bytes);
     h_b =(int*)malloc(bytes);
     h_c =(int*)malloc(bytes);
-    h_c_s =(int*)malloc(bytes);
+   // h_c_s =(int*)malloc(bytes);
 
     //Initialize matrix
     for (int i=0;i<n;i++){
@@ -79,17 +79,16 @@ int main(int argc, char **argv)
     int threads_block =  16;
     dim3 block_size(threads_block,threads_block);
     dim3 grid_size(n/block_size.x,n/block_size.y);
-    printf("Aqui");
       //<<<Bloques,hilos>>>
     
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
-    multiplication2(h_a,h_b,h_c_s,n);
+    //multiplication2(h_a,h_b,h_c_s,n);
   
     //Copy  data  device to host
-    printf("hola1");
+  
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
-    printf("hola2");
-    printf("%d %d\n",h_c[0],h_c_s[0]);
+ 
+    printf("%d \n",h_c[0]);
     // free memory
 
     cudaFree(d_a);
@@ -98,7 +97,7 @@ int main(int argc, char **argv)
     free(h_a);
     free(h_b);
     free(h_c);
-    free(h_c_s);
+    //free(h_c_s);
 
     
     
