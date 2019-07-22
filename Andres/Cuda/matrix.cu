@@ -24,15 +24,6 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
     c[row*n+col]=partial;
 }
 
-void  multiplication2(int* a,int* b,int* c,int  size){
-    for(int i=0;i<size;i++){
-        for(int   j=0;j<size;i++){
-            for(int k=0;k<size;k++){
-                c[i*size+j]  += a[i*size+k] * b[k*size+j];
-            }
-        }
-    }
-}
 
 
 int main(int argc, char **argv)
@@ -97,7 +88,6 @@ int main(int argc, char **argv)
     free(h_a);
     free(h_b);
     free(h_c);
-    free(h_c2);
 
     
     
