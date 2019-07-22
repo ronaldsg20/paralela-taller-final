@@ -88,32 +88,32 @@ int main(int argc, char **argv)
   
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
  
-    cout << endl << "Output Matrix: " << endl;
+    printf( "Output Matrix: \n");
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
     {
-        cout << " " << a[i][j];
+        printf(" %d",b[i][j]) ;
         if(j == n-1)
-            cout << endl;
+            printf("\n");
     }
 
-    cout<<endl;
+    printf("\n");
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
     {
-        cout << " " << b[i][j];
+        printf(" %d",b[i][j]) ;
         if(j == n-1)
-            cout << endl;
+           printf("\n");
     }
-    cout<<endl;
+    printf("\n");
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
     {
-        cout << " " << c[i][j];
+        printf(" %d",b[i][j]) ;
         if(j == n-1)
-            cout << endl;
+           printf("\n");
     }
-    cout<<endl;
+    printf("\n");
     // free memory
 
     cudaFree(d_a);
