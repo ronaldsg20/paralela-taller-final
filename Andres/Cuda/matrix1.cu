@@ -94,6 +94,7 @@ int main(int argc, char **argv)
   
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
  
+   if (n<9){
     printf( "Output Matrix: \n");
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
@@ -120,6 +121,9 @@ int main(int argc, char **argv)
            printf("\n");
     }
     printf("\n");
+
+   }
+    
     // free memory
 
     cudaFree(d_a);
