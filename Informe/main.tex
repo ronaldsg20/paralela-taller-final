@@ -22,7 +22,7 @@
 % paper title
 % can use linebreaks \\ within to get better formatting as desired
 % Do not put math or special symbols in the title.
-\title{Prácticas: Difuminado de imagen}
+\title{Práctica: Multiplicación de matrices}
 
 
 % author names and affiliations
@@ -44,7 +44,9 @@
 
 
 \begin{abstract}
-El presente informe muestra como se llevo a cabo la paralelización  mediante el uso de distintas plataformas de programación como lo son  POSIX, openMP y CUDA   del efecto difuminado.Para un correcto analisis de los resultados se tuvo en cuenta como metricas tanto el Speed Up como de Time Response para los distintas resoluciones  de imagenes (720p, 1080p y 4k)), de kernels (2,3,4,5, 6,7, 8,9, 10,11 ,12 13 y 14) y de hilos (1,2,3,4,5,6,7,8,9 y 10)
+El presente informe muestra como se llevo a cabo la paralelización  mediante el uso de distintas plataformas de programación como lo son openMP,CUDA  y openMPI de la multiplicación de matrices.
+Para un correcto analisis de los resultados se tuvo en cuenta como metricas tanto el Speed Up como de Time Response 
+para los distintos  tamaños de matrices (8,16,32,64,128,256,512 y 1024), de bloques(2,3,4,5,6,7,8,9,10,11,12,13 y 14) y de hilos (10,20,40,60,100,200,400,600,800 y 1000)
 
 \end{abstract}
 
@@ -57,33 +59,34 @@ El presente informe muestra como se llevo a cabo la paralelización  mediante el
 
 \section{Introducción.}
 % no \IEEEPARstart
-Una de las tareas altamente demandada en la actualidad es el procesamiento de imagenes cada vez de una mayor resolución para lo cual se requiere un alto nivel de computo. A partir de esto han surgido innumerables algoritmos que permiten paralelizar las distintas operaciones de procesamiento de imagenes como lo es la del efecto difuminado.\\\\
+La multiplicación de matrices es una  de las operaciones  mas basicas que incluso es enseñada en la primaria.
+ Pero ha pesar de  su    simplicidad ha sido altamente estudiada en  el campo  de la computación  lo   cual
+ ha   hecho que se  desarrollen   algortimos tanto secuenciales como  paralelos para resolver  el problema de 
+ una manera  mas optima.  Dentro de estos podemos mencionar el de  Strassen, divide  and conquer, Coppersmith–Winograd entre otros\\\\
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
-Aun asi paralelizar tiene su limite que es explicado en la Ley de Amdahl, la cual establece que hay un punto en que paralelizar ya no ofrece mejoras significativas de rendimiento e incluso por el contrario puede llevar al deterioro del mismo.\\\\
+Aun asi paralelizar tiene su limite el cual es explicado en la Ley de Amdahl, la cual establece que hay un punto en que paralelizar ya no ofrece mejoras significativas de rendimiento e incluso por el contrario puede llevar al deterioro del mismo.\\\\
 
-Al momento de hacer procesamiento de imagenes se utiliza distintas operaciones matriciales.En el caso del efecto borroso se realiza una convolucion entre la matriz que representa la imagen y el kernel
 
 \begin{figure}[H]
-  \includegraphics[width=\linewidth]{matriz.png}
-  \caption{Convolucion matricial}
+  \includegraphics[width=\linewidth]{matrix.png}
+  \caption{Multiplicacion matricial}
   \label{fig:boat1}
 \end{figure}
-\subsection{Creación del efecto difuminado}
+\subsection{Multiplicación matricial}
 
-Mas especificamente se utilizo la tecnica de difuminado conocida como Blur el cual consiste en intercambiar cada pixel de la imagen por un promedio de los valores RGB que se encuentras en los pixeles adyacentes a el. El nivel de difuminado esta determinado por el kernel y el tamaño da el rango que se toma para evaluar el promedio. Es decir, si se escoge un kernel de 5 significa que cada pixel sera cambiado por el promedio que hay en los promedios de la matriz 5x5 cuyo centro es el pixel en cuestion.
+Para esta practica se paralelizo el algoritmo naive de multiplicación de matrices.Donde se tomaron  las matrices
+de archivos csv donde  se  prepararon  matrices aleatorias de diferente tamaño. Cabe aclarar que el nombre
+indica el tamaño de la matriz. Es decir si el archivo se llama 16A.csv eso quiere decir que es la primera 
+matriz y tiene  un  tamaño de  16x16.  
 
-\section{Algoritmo de paralización.}
-La paralelizacion se realizo mediante asignación tipo blockwise es decir que se tomo la imagen y se dividio a lo alto en filas y cada una de estas se asigno a un hilo. Es decir que un caso hipotetico donde se quiera aplicar el efecto difuminado a una imagen con un alto de 368 pixeles,se  lanzan 4 hilos donde el hilo 1 se le asignaba la fila 1(del pixel 0 al 92), al 2 la fila 2(del pixel 92 al 184 ), al 3 la columna 3(del pixel 184 al 276)  y al 4 la  columna 4(del pixel 276 al 368) . Para mayor clarificación detras de la idea que se uso para la paralización, la siguiente imagen:
+\section{Algoritmo del paralización.}
+La paralelizacion se realizo mediante asignación tipo blockwise es decir que se tomo la primera  matriz y se dividio a lo alto en 
+filas y a cada una de estas se asigno a un hilo o  bloque. Es decir que un caso hipotetico donde se quiera hacer la multiplicacion 
+a dos matrices  de tamaño 16,y   se  lanzan 4 hilos entonces  el hilo 1 se le asignaba la fila 1 a la 4, al 2 la fila 5 a la 8
+, al 3 la fila  9 a la  12  y al 4 de  la fila 13 a la 16 . \\\\
+Cada hilo  hace  la  multiplicación correspondiente generando en la matriz  producto la  fila que le corresponde
 
-\begin{figure}[H]
-  \includegraphics[width=\linewidth]{mod.jpg}
-  \caption{Algoritmo de paralelización}
-  \label{fig:boat2}
-\end{figure}
-
-El ejemplo anterior muestra el caso en el cual se lanza un solo bloque con 4 hilos. Lo mismo se realiza 
-en las otras tecnicas de  paralelización y de computacion distribuida sino en vez de hilos se usan bloques, procesos,nodos y/o una mezcla
 \section{Experimentos y resultados.}
 \subsection{POSIX y OpenMP}
 
@@ -115,10 +118,12 @@ Modelo & Lenovo G50-45\\
 Para evitar o disminuir posibles interferencias se corrio un script que automaticamente cogio todos los casos de prueba mencionados en el resumen, tambien se busco que no haya ninguna aplicacion abierta mientras se corria el script
 
 \subsubsection{Resultados}
-Como primera medida se utilizo el time response o tiempo de ejecución de un programa, donde para cada imagen se crearon sus corresponientes gráficas donde en eje horizontal se colocaron el numero de hilos que ejecutaba el programa y en el eje vertical el tiempo que tardo. Para no sobrecargar la gráfica se decidio incluir solo tres nucleos por grafico, eso hace que por resolucion de imagen se crearan 2 graficos.\\
+Como primera medida se utilizo el time response o tiempo de ejecución de un programa, donde para cada multiplicación  matricial
+ se crearon sus corresponientes gráficas donde en eje horizontal se colocaron el numero de hilos que ejecutaba el programa y en el eje vertical el tiempo que tardo. Para no sobrecargar la gráfica se decidio incluir solo tres tamaños
+ de matriz por grafico.\\
 A continuacion se presentan las gráficas correspondientes:
 \begin{itemize}
-    \item \textbf{Imagen de 720p}
+    \item \textbf{Multiplicación de 8,16 y  32}
     
     \begin{tikzpicture}
 \begin{axis}[

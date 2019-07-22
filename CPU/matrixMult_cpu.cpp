@@ -15,7 +15,7 @@ void readMatrix(char *filename, int **M, int N){
         return;
     }
     char *record,*line;
-    char buffer[1024];
+    char buffer[2300];
     int i=0,j=0;
     while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL){
         j = 0;
@@ -71,8 +71,8 @@ void writeMatrix(char *filename, int **R, int N){
 
 int main(int argc, char **argv){
     // Arguments
-    if ( argc !=  5){
-        printf("usage: ./matrixMult MatA.csv MatB.csv N H\n");
+    if ( argc !=  6){
+        printf("usage: ./matrixMult MatA.csv MatB.csv N H  <PATH-TO-MatC.csv>\n");
         return -1;
     }
     char* fileA = argv[1];
@@ -103,10 +103,10 @@ int main(int argc, char **argv){
         multiplyMatrix(A, B, C,ini,fin,N);
     }
     //multiplyMatrix(A, B, C);      
-    printMatrix(C, N);
+    //printMatrix(C, N);
 
     // Write the matrix
-    //writeMatrix("../Resultados/result.csv", C, N);
+    writeMatrix(argv[5], C, N);
     
     return 0;
 }
