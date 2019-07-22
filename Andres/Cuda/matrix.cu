@@ -18,7 +18,7 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
     int partial=0;
 
     for(int i=0;i<n;i++){
-        partial  += a[row * n +i] * b[i*n+c];
+        partial  += a[row * n +i] * b[i*n+col];
     }
 
     c[row*n+c]=partial;
