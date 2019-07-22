@@ -79,7 +79,7 @@ int main(int argc, char **argv)
     int threads_block =  16;
     dim3 block_size(threads_block,threads_block);
     dim3 grid_size(n/block_size.x,n/block_size.y);
-
+    printf("Aqui");
       //<<<Bloques,hilos>>>
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
     multiplication2(h_a,h_b,h_c2,n);
