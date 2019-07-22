@@ -37,6 +37,7 @@ void  multiplication2(int* a,int* b,int* c,int  size){
 
 int main(int argc, char **argv)
 {
+    printf("Inicio");
     //define variables
     int  n  = 1024;
     //Host matrix
