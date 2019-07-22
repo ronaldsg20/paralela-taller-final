@@ -10,6 +10,20 @@
 
 using namespace std;
 
+__global__ void multiplication(int*  a,int* b,int*  c,int n){
+    //Calculate row and column
+    //int r =blockIdx.y*blockDim.y+threadIdx.y
+    int row = (blockDim.y * blockIdx.y) + threadIdx.y;
+    int col= (blockDim.x * blockIdx.x) + threadIdx.x;
+    int partial=0;
+
+    for(int i=0;i<n;i++){
+        partial  += a[row * n +i] * b[i*n+c];
+    }
+
+    c[row*n+c]=partial;
+}
+
 int main(int argc, char **argv)
 {
     //define variables
@@ -36,9 +50,29 @@ int main(int argc, char **argv)
         for(int  j=0;j<n;j++){
             h_a[i*n+j]  =  rand()%10;
             h_b[i*n+j]  =  rand()%10;
-            h_c[i*n+j] =  0;
         }
     }
+
+    //Allocate memory  in device
+    cudaMalloc(&d_a,bytes);
+    cudaMalloc(&d_b,bytes);
+    cudaMalloc(&d_c,bytes);
+
+    //Copy  data  host to   device
+    cudaMemcpy(d_a,h_a,bytes,cudaMemcpyHostToDevice);
+    cudaMemcpy(d_b,h_b,bytes,cudaMemcpyHostToDevice);
+
+    //Write blocks  and threads
+    int threads_block =  16;
+    dim3 block_size = (threads_block,threads_block);
+    dim3 grid_size = (n/block_size.x,n/block_size.y);
+
+    //multiplication  <<<,>>> (d_a,d_b,d_c,n)
+
+    //Copy  data  device to host
+    cudaMemcpy(h_a,d_p,bytes,cudaMemcpyDeviceToHost);
+
+
     
     
     return 0;
