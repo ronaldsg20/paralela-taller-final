@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 {
     
     //define variables
-    int  n  = 4;
+    int  n  = 1024;
     //Host matrix
     int* h_a;
     int* h_b;
