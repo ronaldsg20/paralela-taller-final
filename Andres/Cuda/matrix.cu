@@ -92,7 +92,7 @@ int main(int argc, char **argv)
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
     {
-        printf(" %d",b[i][j]) ;
+        printf(" %d",h_a[i][j]) ;
         if(j == n-1)
             printf("\n");
     }
@@ -101,7 +101,7 @@ int main(int argc, char **argv)
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
     {
-        printf(" %d",b[i][j]) ;
+        printf(" %d",h_b[i][j]) ;
         if(j == n-1)
            printf("\n");
     }
@@ -109,7 +109,7 @@ int main(int argc, char **argv)
     for(int i = 0; i <n; ++i)
     for(int j = 0; j < n; ++j)
     {
-        printf(" %d",b[i][j]) ;
+        printf(" %d",h_c[i][j]) ;
         if(j == n-1)
            printf("\n");
     }
