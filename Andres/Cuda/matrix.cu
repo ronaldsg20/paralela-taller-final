@@ -79,7 +79,7 @@ int main(int argc, char **argv)
     printf("hola1");
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
     printf("hola2");
-    printf("%d %d\n",h_c[0],h_c2[0]);
+
     // free memory
 
     cudaFree(d_a);
