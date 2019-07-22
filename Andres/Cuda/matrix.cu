@@ -67,13 +67,21 @@ int main(int argc, char **argv)
     dim3 block_size(threads_block,threads_block);
     dim3 grid_size(n/block_size.x,n/block_size.y);
 
-    printf("Grid  size  X: %d Grid  size Y:  %d\n",block_size.x,block_size.y);
+    printf("Grid  size  X: %d Grid  size Y:  %d\n",grid_size.x,grid_size.y);
 
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
 
     //Copy  data  device to host
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
 
+    // free memory
+
+    cudaFree(d_a);
+    cudaFree(d_b);
+    cudaFree(d_c);
+    free(h_a);
+    free(h_b);
+    free(h_c);
 
     
     
