@@ -27,7 +27,7 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
 int main(int argc, char **argv)
 {
     //define variables
-    int  n  = 16;
+    int  n  = 1024;
     //Host matrix
     int* h_a;
     int* h_b;
@@ -67,10 +67,12 @@ int main(int argc, char **argv)
     dim3 block_size(threads_block,threads_block);
     dim3 grid_size(n/block_size.x,n/block_size.y);
 
+    printf("Grid  size  X: %d Grid  size Y:  %d\n",block_size.x,block_size.y)
+
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
 
     //Copy  data  device to host
-    cudaMemcpy(h_a,d_c,bytes,cudaMemcpyDeviceToHost);
+    cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
 
 
     
