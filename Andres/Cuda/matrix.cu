@@ -44,7 +44,7 @@ int main(int argc, char **argv)
     int* h_a;
     int* h_b;
     int* h_c;
-    int* h_c2;
+    int* h_c_s;
 
     //Device  matrix
     int* d_a;
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
     h_a =(int*)malloc(bytes);
     h_b =(int*)malloc(bytes);
     h_c =(int*)malloc(bytes);
-    h_c2 =(int*)malloc(bytes);
+    h_c_s =(int*)malloc(bytes);
 
     //Initialize matrix
     for (int i=0;i<n;i++){
@@ -83,12 +83,12 @@ int main(int argc, char **argv)
     printf("Aqui");
       //<<<Bloques,hilos>>>
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
-    multiplication2(h_a,h_b,h_c2,n);
+    multiplication2(h_a,h_b,h_c_s,n);
     //Copy  data  device to host
     printf("hola1");
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
     printf("hola2");
-    printf("%d %d\n",h_c[0],h_c2[0]);
+    printf("%d %d\n",h_c[0],h_c_s[0]);
     // free memory
 
     cudaFree(d_a);
