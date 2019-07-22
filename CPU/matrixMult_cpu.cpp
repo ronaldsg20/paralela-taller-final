@@ -4,11 +4,11 @@
 #include <string.h>
 
 // Global variables
-int A[1024][1024];
-int B[1024][1024];
-int C[1024][1024];
+int **A;
+int **B;
+int **C;
 
-void readMatrix(char *filename, int M[][1024], int N){
+void readMatrix(char *filename, int **M, int N){
     FILE *fstream = fopen(filename, "r");
     if(fstream == NULL){
         printf("\n file opening failed ");
@@ -28,7 +28,7 @@ void readMatrix(char *filename, int M[][1024], int N){
     }
 }
 
-void printMatrix(int M[][1024], int N){
+void printMatrix(int **M, int N){
     // print matrix for testing
     int i;
     int j;
@@ -41,19 +41,22 @@ void printMatrix(int M[][1024], int N){
     printf("\n");
 }
 
-void multiplyMatrix(int A[][1024], int B[][1024], int C[][1024], int ini, int fin) 
+void multiplyMatrix(int **A, int **B, int **C, int ini, int fin,int N) 
 { 
-    int i, j, k; 
+    int i, j, k,a,b; 
     for (i = ini; i < fin; i++) { 
-        for (j = 0; j < 1024; j++) { 
+        for (j = 0; j < N; j++) { 
             C[i][j] = 0; 
-            for (k = 0; k < 1024; k++) 
-                C[i][j] += A[i][k]*B[k][j]; 
+            for (k = 0; k < N; k++){
+                a=A[i][k];
+                b=B[k][j];
+                C[i][j] += a*b;
+            }  
         } 
     } 
 }
 
-void writeMatrix(char *filename, int R[][1024], int N){
+void writeMatrix(char *filename, int **R, int N){
     FILE *fp;
     int i,j;
     fp=fopen(filename,"w+");
@@ -77,6 +80,12 @@ int main(int argc, char **argv){
     int N = atoi(argv[3]);
     int H = atoi(argv[4]);    
 
+    A = (int **)malloc(N * sizeof(int*));
+    for(int i = 0; i < N; i++) A[i] = (int *)malloc(N * sizeof(int));
+    B = (int **)malloc(N * sizeof(int*));
+    for(int i = 0; i < N; i++) B[i] = (int *)malloc(N * sizeof(int));
+    C = (int **)malloc(N * sizeof(int*));
+    for(int i = 0; i < N; i++) C[i] = (int *)malloc(N * sizeof(int));
     // Read matrix A and B
     readMatrix(fileA, A, N);
     readMatrix(fileB, B, N);
@@ -91,13 +100,13 @@ int main(int argc, char **argv){
         int tn = omp_get_thread_num();
         int ini = (int)(N/H)*(tn);
         int fin = (int)(N/H)+ini;
-        multiplyMatrix(A, B, C,ini,fin);
+        multiplyMatrix(A, B, C,ini,fin,N);
     }
     //multiplyMatrix(A, B, C);      
     printMatrix(C, N);
 
     // Write the matrix
-    writeMatrix("../Resultados/result.csv", C, N);
+    //writeMatrix("../Resultados/result.csv", C, N);
     
     return 0;
 }
