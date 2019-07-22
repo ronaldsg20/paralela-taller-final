@@ -15,8 +15,8 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n,int threads){
     //int r =blockIdx.y*blockDim.y+threadIdx.y
     int tn = (blockDim.x * blockIdx.x) + threadIdx.x;
     
-    int ini = n/threads*(tn);
-    int fin = n/threads+ini;
+    int ini = (int)(n/threads*(tn));
+    int fin = (int)(n/threads+ini);
 
     int i, j, k; 
     if(tn <n){

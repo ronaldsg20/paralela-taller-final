@@ -50,7 +50,7 @@ int main(int argc, char **argv)
     cudaGetDeviceProperties(&deviceProp,0);
 
     int blocks = deviceProp.multiProcessorCount;
-    int threads= n/blocks;
+    int threads= (int)(n/blocks);
     //Host matrix
     int* h_a;
     int* h_b;
