@@ -43,6 +43,7 @@ int main(int argc, char **argv)
     int* h_a;
     int* h_b;
     int* h_c;
+    int* h_c_s;
 
     //Device  matrix
     int* d_a;
@@ -55,6 +56,7 @@ int main(int argc, char **argv)
     h_a =(int*)malloc(bytes);
     h_b =(int*)malloc(bytes);
     h_c =(int*)malloc(bytes);
+    h_c_s =(int*)malloc(bytes);
 
     //Initialize matrix
     for (int i=0;i<n;i++){
