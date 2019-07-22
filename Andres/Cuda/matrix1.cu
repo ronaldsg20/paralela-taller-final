@@ -44,7 +44,8 @@ int main(int argc, char **argv)
     
     //define variables
     int  n  = atoi(argv[1]);
-    int threads_block =  atoi(argv[2]);
+    int blocks = deviceProp.multiProcessorCount;
+    int threads= n/blocks;
     //Host matrix
     int* h_a;
     int* h_b;
@@ -84,10 +85,9 @@ int main(int argc, char **argv)
     //Write blocks  and threads
     
     dim3 block_size(threads_block,threads_block);
-    dim3 grid_size(n/block_size.x,n/block_size.y);
       //<<<Bloques,hilos>>>
     
-    multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n,threads_block);
+    multiplication  <<<blocks,threads>>> (d_a,d_b,d_c,n,threads_block);
     //multiplication2(h_a,h_b,h_c_s,n);
   
     //Copy  data  device to host
