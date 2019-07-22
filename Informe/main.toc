@@ -1,0 +1,12 @@
+\babel@toc {spanish}{}
+\contentsline {section}{\numberline {I}Introducci\IeC {\'o}n.}{1}% 
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {I-A}}Creaci\IeC {\'o}n del efecto difuminado}{1}% 
+\contentsline {section}{\numberline {II}Algoritmo de paralizaci\IeC {\'o}n.}{1}% 
+\contentsline {section}{\numberline {III}Experimentos y resultados.}{2}% 
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}POSIX y OpenMP}{2}% 
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-A}1}Resultados}{2}% 
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}CUDA}{5}% 
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}1}Resultados}{5}% 
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}OpenMPI}{6}% 
+\contentsline {section}{\numberline {IV}Conclusiones}{8}% 
+\contentsline {section}{Referencias}{8}% 
