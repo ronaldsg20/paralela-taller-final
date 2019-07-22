@@ -10,12 +10,16 @@
 // Global variables
 
 
-void readMatrix(char *filename, int M[][1024], int N){
+void readMatrix(char *filename, int **M, int N){
     FILE *fstream = fopen(filename, "r");
     if(fstream == NULL){
         printf("\n file opening failed ");
         return;
     }
+
+    M = (int **)malloc(rows * sizeof(int*));
+    for(int i = 0; i < rows; i++) mat[i] = (int *)malloc(cols * sizeof(int));
+    
     char *record,*line;
     char buffer[1024];
     int i=0,j=0;
@@ -110,9 +114,9 @@ int main(int argc, char **argv){
 
     int *d_N;
     int *d_H;
-    int d_C[1024][1024];
-    int d_A[1024][1024];
-    int d_B[1024][1024];
+    int *d_C;
+    int *d_A;
+    int *d_B;
 
     // Read matrix A and B
     readMatrix(fileA, A, N);
@@ -150,7 +154,7 @@ int main(int argc, char **argv){
     printMatrix(C, N);
 
     // Write the matrix
-    writeMatrix("../Resultados/result.csv", C, N);
+    writeMatrix("result.csv", C, N);
     
     return 0;
 }
