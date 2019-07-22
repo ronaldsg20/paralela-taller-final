@@ -38,7 +38,7 @@ int main(int argc, char **argv)
 {
     
     //define variables
-    int  n  = 1024;
+    int  n  = 8;
     //Host matrix
     int* h_a;
     int* h_b;
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
     cudaMemcpy(d_b,h_b,bytes,cudaMemcpyHostToDevice);
 
     //Write blocks  and threads
-    int threads_block =  16;
+    int threads_block =  4;
     dim3 block_size(threads_block,threads_block);
     dim3 grid_size(n/block_size.x,n/block_size.y);
       //<<<Bloques,hilos>>>
@@ -88,7 +88,32 @@ int main(int argc, char **argv)
   
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
  
-    printf("%d \n",h_c[0]);
+    cout << endl << "Output Matrix: " << endl;
+    for(int i = 0; i <SIZE; ++i)
+    for(int j = 0; j < SIZE; ++j)
+    {
+        cout << " " << a[i][j];
+        if(j == SIZE-1)
+            cout << endl;
+    }
+
+    cout<<endl;
+    for(int i = 0; i <SIZE; ++i)
+    for(int j = 0; j < SIZE; ++j)
+    {
+        cout << " " << b[i][j];
+        if(j == SIZE-1)
+            cout << endl;
+    }
+    cout<<endl;
+    for(int i = 0; i <SIZE; ++i)
+    for(int j = 0; j < SIZE; ++j)
+    {
+        cout << " " << c[i][j];
+        if(j == SIZE-1)
+            cout << endl;
+    }
+    cout<<endl;
     // free memory
 
     cudaFree(d_a);
