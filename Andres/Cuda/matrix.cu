@@ -24,6 +24,15 @@ __global__ void multiplication(int*  a,int* b,int*  c,int n){
     c[row*n+col]=partial;
 }
 
+void  multiplication2(int* a,int* b,int* c,int  size){
+    for(int i=0;i<size;i++){
+        for(int   j=0;j<size;i++){
+            for(int k=0;k<size;k++){
+                c[i*size+j]  += a[i*size+k] * b[k*size+j];
+            }
+        }
+    }
+}
 
 
 int main(int argc, char **argv)
@@ -74,12 +83,12 @@ int main(int argc, char **argv)
     printf("Aqui");
       //<<<Bloques,hilos>>>
     multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
-   
+    multiplication2(h_a,h_b,h_c2,n);
     //Copy  data  device to host
     printf("hola1");
     cudaMemcpy(h_c,d_c,bytes,cudaMemcpyDeviceToHost);
     printf("hola2");
-
+    printf("%d %d\n",h_c[0],h_c2[0]);
     // free memory
 
     cudaFree(d_a);
@@ -88,6 +97,7 @@ int main(int argc, char **argv)
     free(h_a);
     free(h_b);
     free(h_c);
+    free(h_c2);
 
     
     
