@@ -10,20 +10,20 @@
 
 using namespace std;
 
-__global__ void multiplication(int*  a,int* b,int*  c,int n){
+__global__ void multiplication(int*  a,int* b,int*  c,int n,int threads){
     //Calculate row and column
     //int r =blockIdx.y*blockDim.y+threadIdx.y
     int tn = (blockDim.x * blockIdx.x) + threadIdx.x;
     
-    int ini = n/block_size*(tn);
-    int fin = n/block_size+ini;
+    int ini = n/threads*(tn);
+    int fin = n/threads+ini;
 
     int i, j, k; 
     if(tn <n){
         for (i = ini; i < fin; i++) { 
             for (j = 0; j < n; j++) { 
                 for (k = 0; k < n; k++) 
-                    c[i][j] += a[i][k]*b[k][j]; 
+                    c[i*n+j]  += a[i*n+k] * b[k*n+j];
             } 
         }
     }
@@ -87,7 +87,7 @@ int main(int argc, char **argv)
     dim3 grid_size(n/block_size.x,n/block_size.y);
       //<<<Bloques,hilos>>>
     
-    multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n);
+    multiplication  <<<grid_size,block_size>>> (d_a,d_b,d_c,n,threads_block);
     //multiplication2(h_a,h_b,h_c_s,n);
   
     //Copy  data  device to host
