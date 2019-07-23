@@ -44,7 +44,7 @@ void printMatrix(int **M, int N){
     printf("\n");
 }
 
-void multiplyMatrix(int A[1024][1024], int B[1024][1024], int C[1024][1024], int ini, int fin) 
+void multiplyMatrix(int A[][1024], int B[][1024], int C[][1024], int ini, int fin) 
 { 
     int i, j, k; 
     for (i = ini; i < fin; i++) { 
