@@ -17,7 +17,7 @@ void readMatrix(char *filename, int **M, int N){
         return;
     } 
     char *record,*line;
-    char buffer[2300];
+    char buffer[5000];
     int i=0,j=0;
     while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL){
         j = 0;
@@ -43,13 +43,13 @@ void printMatrix(int **M, int N){
     printf("\n");
 }
 
-void multiplyMatrix(int A[][2300], int B[][2300], int C[][2300], int ini, int fin) 
+void multiplyMatrix(int A[][5000], int B[][5000], int C[][5000], int ini, int fin) 
 { 
     int i, j, k; 
     for (i = ini; i < fin; i++) { 
-        for (j = 0; j < 2300; j++) { 
+        for (j = 0; j < 5000; j++) { 
             C[i][j] = 0; 
-            for (k = 0; k < 2300; k++) 
+            for (k = 0; k < 5000; k++) 
                 C[i][j] += A[i][k]*B[k][j]; 
         } 
     } 
