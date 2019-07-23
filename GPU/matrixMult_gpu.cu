@@ -9,6 +9,7 @@
  #include <cuda_runtime.h>
 // Global variables
 
+int   N;
 
 void readMatrix(char *filename, int **M, int N){
     FILE *fstream = fopen(filename, "r");
@@ -43,13 +44,13 @@ void printMatrix(int **M, int N){
     printf("\n");
 }
 
-void multiplyMatrix(int A[][1024], int B[][1024], int C[][1024], int ini, int fin) 
+void multiplyMatrix(int A[][N], int B[][N], int C[][N], int ini, int fin) 
 { 
     int i, j, k; 
     for (i = ini; i < fin; i++) { 
-        for (j = 0; j < 1024; j++) { 
+        for (j = 0; j < N; j++) { 
             C[i][j] = 0; 
-            for (k = 0; k < 1024; k++) 
+            for (k = 0; k < N; k++) 
                 C[i][j] += A[i][k]*B[k][j]; 
         } 
     } 
@@ -113,7 +114,7 @@ int main(int argc, char **argv){
     }
     char* fileA = argv[1];
     char* fileB = argv[2];
-    int N = atoi(argv[3]);
+    N = atoi(argv[3]);
     int H = atoi(argv[4]);    
 
     //device variables
