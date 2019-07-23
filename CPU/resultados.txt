@@ -4,97 +4,97 @@
 |=========================|
 ----------- Hilos :1  -----
 
-real	0m0,007s
-user	0m0,003s
+real	0m0,009s
+user	0m0,005s
 sys	0m0,003s
 ----------- Hilos :2  -----
 
-real	0m0,012s
-user	0m0,005s
-sys	0m0,005s
+real	0m0,008s
+user	0m0,002s
+sys	0m0,006s
 ----------- Hilos :3  -----
 
-real	0m0,029s
-user	0m0,031s
+real	0m0,010s
+user	0m0,009s
 sys	0m0,000s
 ----------- Hilos :4  -----
 
-real	0m0,015s
-user	0m0,024s
-sys	0m0,000s
+real	0m0,019s
+user	0m0,030s
+sys	0m0,004s
 ----------- Hilos :5  -----
 
 real	0m0,010s
-user	0m0,001s
-sys	0m0,005s
------------ Hilos :6  -----
-
-real	0m0,008s
-user	0m0,003s
-sys	0m0,003s
------------ Hilos :7  -----
-
-real	0m0,028s
-user	0m0,004s
-sys	0m0,003s
------------ Hilos :8  -----
-
-real	0m0,015s
-user	0m0,006s
-sys	0m0,000s
------------ Hilos :9  -----
-
-real	0m0,007s
-user	0m0,003s
-sys	0m0,003s
------------ Hilos :10  -----
-
-real	0m0,007s
 user	0m0,000s
 sys	0m0,006s
------------ Hilos :11  -----
+----------- Hilos :6  -----
+
+real	0m0,019s
+user	0m0,007s
+sys	0m0,000s
+----------- Hilos :7  -----
 
 real	0m0,009s
-user	0m0,001s
-sys	0m0,006s
+user	0m0,006s
+sys	0m0,001s
+----------- Hilos :8  -----
+
+real	0m0,009s
+user	0m0,006s
+sys	0m0,001s
+----------- Hilos :9  -----
+
+real	0m0,010s
+user	0m0,007s
+sys	0m0,001s
+----------- Hilos :10  -----
+
+real	0m0,009s
+user	0m0,006s
+sys	0m0,001s
+----------- Hilos :11  -----
+
+real	0m0,007s
+user	0m0,006s
+sys	0m0,001s
 ----------- Hilos :12  -----
 
-real	0m0,011s
-user	0m0,003s
-sys	0m0,004s
+real	0m0,008s
+user	0m0,001s
+sys	0m0,006s
 |=========================|
 |-------Matriz 16 X 16-----|
 |=========================|
 ----------- Hilos :1  -----
 
-real	0m0,014s
-user	0m0,003s
-sys	0m0,002s
+real	0m0,008s
+user	0m0,000s
+sys	0m0,006s
 ----------- Hilos :2  -----
 
-real	0m0,015s
-user	0m0,014s
+real	0m0,008s
+user	0m0,007s
 sys	0m0,000s
 ----------- Hilos :3  -----
 
-real	0m0,014s
-user	0m0,012s
-sys	0m0,004s
+real	0m0,020s
+user	0m0,023s
+sys	0m0,006s
 ----------- Hilos :4  -----
 
-real	0m0,018s
-user	0m0,021s
+real	0m0,015s
+user	0m0,020s
 sys	0m0,006s
 ----------- Hilos :5  -----
 
-real	0m0,014s
-user	0m0,003s
-sys	0m0,003s
+real	0m0,008s
+user	0m0,007s
+sys	0m0,000s
 ----------- Hilos :6  -----
 
-real	0m0,007s
-user	0m0,000s
-sys	0m0,005s
+real	0m0,008s
+user	0m0,007s
+sys	0m0,000s
 ----------- Hilos :7  -----
 
 real	0m0,009s
@@ -102,341 +102,404 @@ user	0m0,007s
 sys	0m0,000s
 ----------- Hilos :8  -----
 
-real	0m0,009s
-user	0m0,000s
-sys	0m0,006s
------------ Hilos :9  -----
-
-real	0m0,009s
-user	0m0,006s
-sys	0m0,000s
------------ Hilos :10  -----
-
-real	0m0,008s
-user	0m0,000s
-sys	0m0,006s
------------ Hilos :11  -----
-
-real	0m0,007s
+real	0m0,021s
 user	0m0,006s
 sys	0m0,001s
+----------- Hilos :9  -----
+
+real	0m0,013s
+user	0m0,003s
+sys	0m0,005s
+----------- Hilos :10  -----
+
+real	0m0,009s
+user	0m0,006s
+sys	0m0,001s
+----------- Hilos :11  -----
+
+real	0m0,012s
+user	0m0,001s
+sys	0m0,007s
 ----------- Hilos :12  -----
 
-real	0m0,010s
-user	0m0,007s
-sys	0m0,000s
+real	0m0,020s
+user	0m0,001s
+sys	0m0,007s
 |=========================|
 |-------Matriz 32 X 32-----|
 |=========================|
 ----------- Hilos :1  -----
 
-real	0m0,009s
-user	0m0,007s
-sys	0m0,000s
+real	0m0,011s
+user	0m0,004s
+sys	0m0,003s
 ----------- Hilos :2  -----
 
-real	0m0,008s
-user	0m0,003s
-sys	0m0,006s
+real	0m0,018s
+user	0m0,005s
+sys	0m0,007s
 ----------- Hilos :3  -----
 
-real	0m0,014s
-user	0m0,008s
+real	0m0,017s
+user	0m0,021s
 sys	0m0,004s
 ----------- Hilos :4  -----
 
-real	0m0,037s
-user	0m0,051s
-sys	0m0,009s
+real	0m0,012s
+user	0m0,011s
+sys	0m0,010s
 ----------- Hilos :5  -----
 
-real	0m0,009s
-user	0m0,003s
-sys	0m0,003s
+real	0m0,010s
+user	0m0,001s
+sys	0m0,007s
 ----------- Hilos :6  -----
 
-real	0m0,010s
-user	0m0,008s
+real	0m0,009s
+user	0m0,007s
 sys	0m0,001s
 ----------- Hilos :7  -----
 
-real	0m0,009s
-user	0m0,000s
-sys	0m0,006s
+real	0m0,011s
+user	0m0,004s
+sys	0m0,005s
 ----------- Hilos :8  -----
 
 real	0m0,011s
-user	0m0,007s
-sys	0m0,000s
+user	0m0,001s
+sys	0m0,007s
 ----------- Hilos :9  -----
 
-real	0m0,015s
-user	0m0,006s
-sys	0m0,000s
+real	0m0,021s
+user	0m0,003s
+sys	0m0,005s
 ----------- Hilos :10  -----
 
-real	0m0,018s
-user	0m0,001s
-sys	0m0,008s
+real	0m0,014s
+user	0m0,003s
+sys	0m0,006s
 ----------- Hilos :11  -----
 
-real	0m0,016s
-user	0m0,004s
+real	0m0,009s
+user	0m0,005s
 sys	0m0,004s
 ----------- Hilos :12  -----
 
-real	0m0,009s
-user	0m0,003s
-sys	0m0,005s
+real	0m0,011s
+user	0m0,001s
+sys	0m0,007s
 |=========================|
 |-------Matriz 64 X 64-----|
 |=========================|
 ----------- Hilos :1  -----
 
-real	0m0,015s
+real	0m0,017s
 user	0m0,007s
-sys	0m0,007s
+sys	0m0,009s
 ----------- Hilos :2  -----
 
-real	0m0,015s
-user	0m0,008s
-sys	0m0,008s
+real	0m0,016s
+user	0m0,015s
+sys	0m0,005s
 ----------- Hilos :3  -----
 
-real	0m0,012s
-user	0m0,011s
-sys	0m0,004s
+real	0m0,010s
+user	0m0,016s
+sys	0m0,000s
 ----------- Hilos :4  -----
 
-real	0m0,027s
-user	0m0,044s
+real	0m0,028s
+user	0m0,049s
 sys	0m0,004s
 ----------- Hilos :5  -----
 
-real	0m0,013s
-user	0m0,006s
-sys	0m0,006s
+real	0m0,012s
+user	0m0,011s
+sys	0m0,002s
 ----------- Hilos :6  -----
 
-real	0m0,019s
-user	0m0,010s
-sys	0m0,003s
+real	0m0,015s
+user	0m0,016s
+sys	0m0,000s
 ----------- Hilos :7  -----
 
 real	0m0,016s
-user	0m0,009s
-sys	0m0,003s
+user	0m0,014s
+sys	0m0,000s
 ----------- Hilos :8  -----
 
 real	0m0,014s
-user	0m0,008s
-sys	0m0,005s
------------ Hilos :9  -----
-
-real	0m0,022s
 user	0m0,014s
 sys	0m0,000s
------------ Hilos :10  -----
-
-real	0m0,014s
-user	0m0,015s
-sys	0m0,000s
------------ Hilos :11  -----
+----------- Hilos :9  -----
 
 real	0m0,020s
 user	0m0,009s
 sys	0m0,004s
+----------- Hilos :10  -----
+
+real	0m0,017s
+user	0m0,010s
+sys	0m0,004s
+----------- Hilos :11  -----
+
+real	0m0,022s
+user	0m0,009s
+sys	0m0,005s
 ----------- Hilos :12  -----
 
-real	0m0,016s
-user	0m0,009s
-sys	0m0,004s
+real	0m0,017s
+user	0m0,007s
+sys	0m0,006s
 |=========================|
 |-------Matriz 128 X 128-----|
 |=========================|
 ----------- Hilos :1  -----
 
-real	0m0,050s
-user	0m0,048s
+real	0m0,055s
+user	0m0,051s
 sys	0m0,000s
 ----------- Hilos :2  -----
 
-real	0m0,041s
-user	0m0,056s
-sys	0m0,004s
+real	0m0,048s
+user	0m0,069s
+sys	0m0,000s
 ----------- Hilos :3  -----
 
-real	0m0,042s
-user	0m0,062s
-sys	0m0,000s
+real	0m0,051s
+user	0m0,061s
+sys	0m0,010s
 ----------- Hilos :4  -----
 
-real	0m0,037s
-user	0m0,070s
+real	0m0,055s
+user	0m0,099s
 sys	0m0,003s
 ----------- Hilos :5  -----
 
-real	0m0,034s
-user	0m0,043s
-sys	0m0,007s
+real	0m0,035s
+user	0m0,049s
+sys	0m0,003s
 ----------- Hilos :6  -----
 
-real	0m0,044s
-user	0m0,054s
-sys	0m0,003s
+real	0m0,033s
+user	0m0,050s
+sys	0m0,001s
 ----------- Hilos :7  -----
 
-real	0m0,034s
-user	0m0,042s
-sys	0m0,009s
+real	0m0,037s
+user	0m0,052s
+sys	0m0,000s
 ----------- Hilos :8  -----
 
-real	0m0,042s
-user	0m0,052s
-sys	0m0,003s
+real	0m0,035s
+user	0m0,046s
+sys	0m0,007s
 ----------- Hilos :9  -----
 
-real	0m0,040s
-user	0m0,052s
-sys	0m0,000s
+real	0m0,037s
+user	0m0,044s
+sys	0m0,008s
 ----------- Hilos :10  -----
 
-real	0m0,035s
-user	0m0,044s
-sys	0m0,009s
+real	0m0,036s
+user	0m0,046s
+sys	0m0,004s
 ----------- Hilos :11  -----
 
-real	0m0,039s
-user	0m0,038s
-sys	0m0,012s
+real	0m0,041s
+user	0m0,039s
+sys	0m0,014s
 ----------- Hilos :12  -----
 
-real	0m0,033s
-user	0m0,049s
-sys	0m0,000s
+real	0m0,037s
+user	0m0,037s
+sys	0m0,011s
+|=========================|
+|-------Matriz 256 X 256-----|
+|=========================|
+----------- Hilos :1  -----
+
+real	0m0,313s
+user	0m0,306s
+sys	0m0,007s
+----------- Hilos :2  -----
+
+real	0m0,209s
+user	0m0,333s
+sys	0m0,008s
+----------- Hilos :3  -----
+
+real	0m0,156s
+user	0m0,337s
+sys	0m0,007s
+----------- Hilos :4  -----
+
+real	0m0,161s
+user	0m0,379s
+sys	0m0,010s
+----------- Hilos :5  -----
+
+real	0m0,175s
+user	0m0,346s
+sys	0m0,008s
+----------- Hilos :6  -----
+
+real	0m0,157s
+user	0m0,333s
+sys	0m0,007s
+----------- Hilos :7  -----
+
+real	0m0,142s
+user	0m0,312s
+sys	0m0,008s
+----------- Hilos :8  -----
+
+real	0m0,141s
+user	0m0,308s
+sys	0m0,011s
+----------- Hilos :9  -----
+
+real	0m0,145s
+user	0m0,305s
+sys	0m0,011s
+----------- Hilos :10  -----
+
+real	0m0,158s
+user	0m0,342s
+sys	0m0,003s
+----------- Hilos :11  -----
+
+real	0m0,149s
+user	0m0,311s
+sys	0m0,014s
+----------- Hilos :12  -----
+
+real	0m0,164s
+user	0m0,324s
+sys	0m0,021s
 |=========================|
 |-------Matriz 512 X 512-----|
 |=========================|
 ----------- Hilos :1  -----
 
-real	0m3,677s
-user	0m3,320s
-sys	0m0,033s
+real	0m2,848s
+user	0m2,833s
+sys	0m0,014s
 ----------- Hilos :2  -----
 
-real	0m1,740s
-user	0m3,088s
-sys	0m0,047s
+real	0m1,550s
+user	0m2,850s
+sys	0m0,020s
 ----------- Hilos :3  -----
 
-real	0m1,378s
-user	0m3,286s
-sys	0m0,033s
+real	0m1,130s
+user	0m2,940s
+sys	0m0,007s
 ----------- Hilos :4  -----
 
-real	0m1,277s
-user	0m3,329s
-sys	0m0,026s
+real	0m1,076s
+user	0m3,226s
+sys	0m0,017s
 ----------- Hilos :5  -----
 
-real	0m1,252s
-user	0m3,275s
-sys	0m0,030s
+real	0m0,965s
+user	0m3,060s
+sys	0m0,011s
 ----------- Hilos :6  -----
 
-real	0m1,150s
-user	0m3,242s
-sys	0m0,023s
+real	0m1,047s
+user	0m3,096s
+sys	0m0,024s
 ----------- Hilos :7  -----
 
-real	0m1,223s
-user	0m3,289s
-sys	0m0,017s
+real	0m0,955s
+user	0m3,099s
+sys	0m0,018s
 ----------- Hilos :8  -----
 
-real	0m1,243s
-user	0m3,309s
-sys	0m0,020s
+real	0m0,983s
+user	0m3,138s
+sys	0m0,011s
 ----------- Hilos :9  -----
 
-real	0m1,200s
-user	0m3,264s
-sys	0m0,020s
+real	0m0,959s
+user	0m3,078s
+sys	0m0,017s
 ----------- Hilos :10  -----
 
-real	0m1,222s
-user	0m3,305s
-sys	0m0,020s
+real	0m1,102s
+user	0m3,180s
+sys	0m0,017s
 ----------- Hilos :11  -----
 
-real	0m1,197s
-user	0m3,279s
-sys	0m0,020s
+real	0m0,948s
+user	0m3,070s
+sys	0m0,008s
 ----------- Hilos :12  -----
 
-real	0m1,173s
-user	0m3,257s
-sys	0m0,023s
+real	0m0,964s
+user	0m3,086s
+sys	0m0,010s
 |=========================|
 |-------Matriz 1024 X 1024-----|
 |=========================|
 ----------- Hilos :1  -----
 
-real	0m42,969s
-user	0m39,606s
-sys	0m0,223s
+real	0m36,389s
+user	0m36,315s
+sys	0m0,067s
 ----------- Hilos :2  -----
 
-real	0m20,050s
-user	0m38,469s
-sys	0m0,223s
+real	0m18,292s
+user	0m35,619s
+sys	0m0,073s
 ----------- Hilos :3  -----
 
-real	0m17,540s
-user	0m42,452s
-sys	0m0,283s
+real	0m13,344s
+user	0m37,595s
+sys	0m0,053s
 ----------- Hilos :4  -----
 
-real	0m15,077s
-user	0m42,544s
-sys	0m0,327s
+real	0m10,989s
+user	0m39,800s
+sys	0m0,066s
 ----------- Hilos :5  -----
 
-real	0m14,281s
-user	0m42,478s
-sys	0m0,239s
+real	0m11,466s
+user	0m40,280s
+sys	0m0,047s
 ----------- Hilos :6  -----
 
-real	0m13,763s
-user	0m42,005s
-sys	0m0,234s
+real	0m11,441s
+user	0m40,488s
+sys	0m0,086s
 ----------- Hilos :7  -----
 
-real	0m13,969s
-user	0m42,510s
-sys	0m0,284s
+real	0m11,333s
+user	0m40,500s
+sys	0m0,044s
 ----------- Hilos :8  -----
 
-real	0m14,127s
-user	0m42,624s
-sys	0m0,214s
+real	0m11,164s
+user	0m40,633s
+sys	0m0,057s
 ----------- Hilos :9  -----
 
-real	0m13,977s
-user	0m42,553s
-sys	0m0,209s
+real	0m11,314s
+user	0m40,478s
+sys	0m0,091s
 ----------- Hilos :10  -----
 
-real	0m14,292s
-user	0m42,692s
-sys	0m0,177s
+real	0m11,313s
+user	0m40,734s
+sys	0m0,083s
 ----------- Hilos :11  -----
 
-real	0m12,561s
-user	0m41,793s
-sys	0m0,136s
+real	0m11,373s
+user	0m40,830s
+sys	0m0,073s
 ----------- Hilos :12  -----
 
-real	0m13,922s
-user	0m42,692s
-sys	0m0,172s
+real	0m11,299s
+user	0m40,846s
+sys	0m0,071s

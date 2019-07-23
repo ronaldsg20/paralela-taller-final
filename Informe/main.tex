@@ -123,129 +123,86 @@ Como primera medida se utilizo el time response o tiempo de ejecución de un pro
  de matriz por grafico.\\
 A continuacion se presentan las gráficas correspondientes:
 \begin{itemize}
-    \item \textbf{Multiplicación de 8,16 y  32}
+    \item \textbf{Matrices de tamaño 8,16 y  32}
     
     \begin{tikzpicture}
 \begin{axis}[
 xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 720p},
+extra x ticks={1,2,3,4,5,6,7,8,9,10,11,12},
+title={Time Response 8,16 y 32},
 xlabel={Numero de hilos},
 ylabel={Tiempo},
 nodes near coords, 
  every node near coord/.append style={font=\tiny,yshift=-1.6pt},
  nodes near coords style={/pgf/number format/.cd,precision=3},
 ]
-\addplot coordinates { (1,0.28) (2,0.242) (4,0.213) (8,0.216) (16,0.196)  };
-\addplot coordinates { (1,0.620) (2,0.397) (4,0.301) (8,0.306) (16,0.307)  };
-\addlegendentry{Kernel 4}
-\addlegendentry{Kernel 8}
+\addplot coordinates { (1,0.009) (2,0.008) (3,0.01) (4,0.019) (5,0.01) (6,0.019)  (7,0.009) (8,0.009) (9,0.01) (10,0.009)  (11,0.007)  (12,0.008) };
+\addplot coordinates { (1,0.008) (2,0.008) (3,0.02) (4,0.015) (5,0.008) (6,0.008)  (7,0.009) (8,0.021) (9,0.013) (10,0.009)  (11,0.012)  (12,0.02) };
+\addplot coordinates { (1,0.011) (2,0.018) (3,0.017) (4,0.012) (5,0.01) (6,0.009)  (7,0.011) (8,0.011) (9,0.021) (10,0.014)  (11,0.009)  (12,0.011) };
+
+\addlegendentry{Size 8}
+\addlegendentry{Size 16}
+\addlegendentry{Size 32}
 \end{axis}
 \end{tikzpicture}
+
+Como podemos  observar de la anterior gráfica  el beneficio
+de la paralelización en matrices pequeñas no es significativo.
+Esto se debe al tiempo de  lanzado   de hilos en estos casos
+aun es un tiempo significativo  si lo  comparamos con el tiempo
+total que demora el algortimo.
+
+\item \textbf{Matrices de tamaño 256 y 512}
 
 \begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 720p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
-]
-\addplot coordinates { (1,0.850) (2,0.525) (4,0.392) (8,0.373) (16,0.382)  };
-\addplot coordinates { (1,1.558) (2,0.833) (4,0.577) (8,0.554) (16,0.559)  };
-\addlegendentry{Kernel 10}
-\addlegendentry{Kernel 14}
-\end{axis}
-\end{tikzpicture}
+    \begin{axis}[
+    xticklabels={},
+    extra x ticks={1,2,3,4,5,6,7,8,9,10,11,12},
+    title={Time Response 256 y 512},
+    xlabel={Numero de hilos},
+    ylabel={Tiempo},
+    nodes near coords, 
+     every node near coord/.append style={font=\tiny,yshift=-1.6pt},
+     nodes near coords style={/pgf/number format/.cd,precision=3},
+    ]
+    \addplot coordinates { (1,0.313) (2,0.209) (3,0.156) (4,0.161) (5,0.175) (6,0.157)  (7,0.142) (8,0.141) (9,0.145) (10,0.158)  (11,0.149)  (12,0.164) };
+    \addplot coordinates { (1,2.848) (2,1.550) (3,1.13) (4,1.076) (5,0.965) (6,1.047)  (7,0.955) (8,0.983) (9,0.959) (10,1.102)  (11,0.948)  (12,0.964) };
+    
+    
+    \addlegendentry{Size 256}
+    \addlegendentry{Size 512}
+    \end{axis}
+    \end{tikzpicture}
 
-\item \textbf{Imagen de 1080p}
 
-
-
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 1080p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
-]
-\addplot coordinates { (1,0.539) (2,0.385) (4,0.292) (8,0.303) (16,0.310)  };
-\addplot coordinates { (1,1.34) (2,0.763) (4,0.566) (8,0.523) (16,0.545)  };
-\addlegendentry{Kernel 4}
-\addlegendentry{Kernel 8}
-\end{axis}
-\end{tikzpicture}
+\item \textbf{Matriz de tamaño 1024}
 
 \begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 1080p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
-]
-\addplot coordinates { (1,1.954) (2,1.105) (4,0.698) (8,0.705) (16,0.729)  };
-\addplot coordinates { (1,2.699) (2,1.515) (4,0.954) (8,0.924) (16,0.913)  };
-\addplot coordinates { (1,3.587) (2,1.956) (4,1.192) (8,1.214) (16,1.223)  };
-\addlegendentry{Kernel 10}
-\addlegendentry{Kernel 12}
-\addlegendentry{Kernel 14}
-\end{axis}
-\end{tikzpicture}
-
-\item \textbf{Imagen de 4k}
-
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 4k},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
-]
-\addplot coordinates { (1,4.941) (2,2.859) (4,2.245) (8,2.190) (16,2.275)  };
-\addplot coordinates { (1,15.19) (2,8.295) (4,5.436) (8,5.330) (16,5.370)  };
-\addlegendentry{Kernel 4}
-\addlegendentry{Kernel 8}
-\end{axis}
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 4k},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
-]
-\addplot coordinates { (1,22.896) (2,12.262) (4,7.750) (8,7.683) (16,7.711)  };
-\addplot coordinates { (1,43.849) (2,23.408) (4,14.281) (8,13.948) (16,13.842)  };
-\addlegendentry{Kernel 10}
-\addlegendentry{Kernel 14}
-\end{axis}
-\end{tikzpicture}
-
+    \begin{axis}[
+    xticklabels={},
+    extra x ticks={1,2,3,4,5,6,7,8,9,10,11,12},
+    title={Time Response 1024},
+    xlabel={Numero de hilos},
+    ylabel={Tiempo},
+    nodes near coords, 
+     every node near coord/.append style={font=\tiny,yshift=-1.6pt},
+     nodes near coords style={/pgf/number format/.cd,precision=3},
+    ]
+    \addplot coordinates { (1,36.389) (2,18.292) (3,13.344) (4,10.989) (5,11.466) (6,11.441)  (7,11.333) (8,11.164) (9,11.314) (10,11.313)  (11,11.373)  (12,11.299) };
+    
+    \addlegendentry{Size 1024}
+    \end{axis}
+    \end{tikzpicture}
 \end{itemize}
 
-Como se puede observar en las gráficas anteriores el time response del código tiene cierta tendencia de  mejorar conforme se aumenta la cantidad de hilos que son lanzados hasta los 4 hilos, de ahi en adelante la mejora es insignificante y en algunos casos como en la imagen de 720p se ve cierta desmejora.\\
+Como podemos ver de las anteriores 2 gráficas el comportamiento de la
+ paralelización tiende a ser el esperado en matrices grandes donde el 
+ tiempo de  lanzamiento de los hilos  ya no es significante.
 
-Otra medida que se considero determinar para medir el rendimiento de los hilos en el programa es el speed up es decir el tiempo de ejecución secuencial dividido entre el tiempo de ejecución por cada una de las cantidad de hilos(1,2,4,8,16). \\
+Tambien  se  observa que el time response  tiene cierta tendencia a  mejorar conforme se aumenta la cantidad de hilos que son lanzados hasta los 4 hilos, de ahi en adelante la mejora es insignificante y en algunos casos tiende a desmejorar.
+Esto se debe a que el computador donde se corrio el código solo tiene 4 nucleos\\
+
+Otra medida que se considero determinar para medir el rendimiento del programa es el speed up es decir el tiempo de ejecución secuencial dividido entre el tiempo de ejecución paralelo. \\
 A continuación se presentan las gráficas correspondientes:
 
 \begin{itemize}

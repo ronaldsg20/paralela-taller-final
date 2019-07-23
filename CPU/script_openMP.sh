@@ -1,7 +1,7 @@
 
 echo "" > resultados.txt
 
-for N in 8 16 32 64 128 512 1024;
+for N in 8 16 32 64 128 256 512 1024;
 do
     echo "|=========================|" >> resultados.txt
     echo "|-------Matriz $N X $N-----|" >> resultados.txt

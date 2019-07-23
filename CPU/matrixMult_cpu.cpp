@@ -107,6 +107,7 @@ int main(int argc, char **argv){
 
     // Write the matrix
     writeMatrix(argv[5], C, N);
-    
+
+   
     return 0;
 }
