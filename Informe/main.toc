@@ -5,8 +5,8 @@
 \contentsline {section}{\numberline {III}Experimentos y resultados.}{1}% 
 \contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}POSIX y OpenMP}{1}% 
 \contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-A}1}Resultados}{2}% 
-\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}CUDA}{4}% 
-\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}1}Resultados}{4}% 
-\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}OpenMPI}{6}% 
-\contentsline {section}{\numberline {IV}Conclusiones}{7}% 
-\contentsline {section}{Referencias}{8}% 
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}CUDA}{3}% 
+\contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}1}Resultados}{3}% 
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-C}}OpenMPI}{4}% 
+\contentsline {section}{\numberline {IV}Conclusiones}{5}% 
+\contentsline {section}{Referencias}{6}% 

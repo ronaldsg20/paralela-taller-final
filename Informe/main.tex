@@ -207,272 +207,60 @@ A continuación se presentan las gráficas correspondientes:
 
 \begin{itemize}
 
-\item \textbf{Imagen de 720p}
-
-\begin{tikzpicture}
+    \item \textbf{Matrices de tamaño 8,16 y  32}
+    
+    \begin{tikzpicture}
 \begin{axis}[
 xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Speed Up 720p},
+extra x ticks={1,2,3,4,5,6,7,8,9,10,11,12},
+title={ Speed Up 8,16 y 32},
 xlabel={Numero de hilos},
 ylabel={Tiempo},
 nodes near coords, 
  every node near coord/.append style={font=\tiny,yshift=-1.6pt},
  nodes near coords style={/pgf/number format/.cd,precision=3},
  legend pos=south east,
-]
-\addplot coordinates { (1,1) (2,1.198347107) (4,1.361502347) (8,1.342592593) (16,1.479591837)  };
-\addplot coordinates { (1,1) (2,1.561712846) (4,2.059800664) (8,2.026143791) (16,2.019543974)  };
-\addlegendentry{Kernel 4}
-\addlegendentry{Kernel 8}
+ ]
+\addplot coordinates { (2,1.125) (3,0.9) (4,0) (5,0.9) (6,0.474) (7,1)  (8,1) (9,0.9) (10,1) (11,1.286)  (12,1.125) };
+\addplot coordinates { (2,1) (3,0.4) (4,0.533) (5,1) (6,1) (7,0.889)  (8,0.381) (9,0.615) (10,0.889) (11,0.667)  (12,0.4) };
+\addplot coordinates { (2,0.611) (3,0.647) (4,0.917) (5,1.1) (6,1.222) (7,1)  (8,1) (9,0.524) (10,0.786) (11,1.222)  (12,1) };
+
+
+\addlegendentry{Size 8}
+\addlegendentry{Size 16}
+\addlegendentry{Size 32}
 \end{axis}
 \end{tikzpicture}
 
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Speed Up 720p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
- legend pos=south east,
-]
-\addplot coordinates { (1,1) (2,1.619047619) (4,2.168367347) (8,2.278820375) (16,2.22513089)  };
-\addplot coordinates { (1,1) (2,1.870348139) (4,2.70017331) (8,2.812274368) (16,2.787119857)  };
-\addlegendentry{Kernel 10}
-\addlegendentry{Kernel 14}
-\end{axis}
-\end{tikzpicture}
-
-    \item \textbf{Imagen de 1080p}
+    \item \textbf{Matrices de tamaño 256 ,512 y 1024}
     
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Speed Up 1080p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
- legend pos=south east,
-]
-\addplot coordinates { (1,1) (2,1.4) (4,1.845890411) (8,1.778877888) (16,1.738709677)  };
-\addplot coordinates { (1,1) (2,1.756225426) (4,2.367491166) (8,2.562141491) (16,2.458715596)  };
-\addlegendentry{Kernel 4}
-\addlegendentry{Kernel 8}
-\end{axis}
-\end{tikzpicture}
-\\
-Para estas últimas tre gráficas se decidio omitir a proposito la leyenda del tiempo en cada uno de los nodos, debido a la superposicion que se genera.
+    \begin{tikzpicture}
+        \begin{axis}[
+        xticklabels={},
+        extra x ticks={1,2,3,4,5,6,7,8,9,10,11,12},
+        title={ Speed Up 256,512 y 1024},
+        xlabel={Numero de hilos},
+        ylabel={Tiempo},
+        nodes near coords, 
+         every node near coord/.append style={font=\tiny,yshift=-1.6pt},
+         nodes near coords style={/pgf/number format/.cd,precision=3},
+         legend pos=south east,
+         ]
+        \addplot coordinates { (2,1.498) (3,2.006) (4,1.944) (5,1.789) (6,1.994) (7,2.204)  (8,2.22) (9,2.159) (10,1.981) (11,2.101)  (12,1.909) };
+        \addplot coordinates { (2,1.837) (3,2.52) (4,2.647) (5,2.951) (6,2.720) (7,2.982)  (8,2.897) (9,2.970) (10,2.584) (11,3.004)  (12,2.954) };
+        \addplot coordinates { (2,1.989) (3,2.727) (4,3.311) (5,3.174) (6,3.181) (7,3.211)  (8,3.259) (9,3.216) (10,3.217) (11,3.2)  (12,3.221) };
+        
+        \addlegendentry{Size 256}
+        \addlegendentry{Size 512}
+        \addlegendentry{Size 1024}
+        \end{axis}
+        \end{tikzpicture}
 
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Speed Up 1080p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
- legend pos=south east,
-]
-\addplot coordinates { (1,1) (2,1.768325792) (4,2.799426934) (8,2.771631206) (16,2.680384088)  };
-\addplot coordinates { (1,1) (2,1.833844581) (4,3.009228188) (8,2.954695222) (16,2.932951758)  };
-\addlegendentry{Kernel 10}
-\addlegendentry{Kernel 14}
-\end{axis}
-\end{tikzpicture}
-    
-\item \textbf{Imagen de 4k}\\
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Speed Up 4k},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
- legend pos=south east,
-]
-\addplot coordinates { (1,1) (2,1.728226653) (4,2.200890869) (8,2.256164384) (16,2.171868132)  };
-\addplot coordinates { (1,1) (2,1.831223629) (4,2.794334069) (8,2.849906191) (16,2.82867784)  };
-\addlegendentry{Kernel 4}
-\addlegendentry{Kernel 8}
-\end{axis}
-\end{tikzpicture}
-
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Speed Up 4k},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
- legend pos=south east
-]
-\addplot coordinates { (1,1) (2,1.867232099) (4,2.954322581) (8,2.980085904) (16,2.969264687)  };
-\addplot coordinates { (1,1) (2,1.873248462) (4,3.070443246) (8,3.143748208) (16,3.167822569)  };
-\addlegendentry{Kernel 10}
-\addlegendentry{Kernel 14}
-\end{axis}
-\end{tikzpicture}
-    
     
 \end{itemize}
 
 Como podemos observar en las gráficas anteriores el speed up es el esperado ya que el tiempo tiene una tendencia a aumentar conforme el programa se ejecuta con más hilos.\\
 
-Por último se considero importante realizar una comparación de time response entre el código de difuminado usando POSIX que fue el de la primera practica y el actual que es usando la librerio OpenMP. Para simplificar un poco el informe se considero solamente comparar con los kernel 6 y 12 en cada una de las resoluciones de imagen. A continuación se presentan las gráficas correspondientes:\\\\
-Para estas ultimas gráficas tambien se decidio omitir la leyenda del tiempo en cada uno de los nodos, debido a la superposición que se genera.
-
-\begin{itemize}
-    \item \textbf{Imagen de 720p}
-    
-    \begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 720p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-]
-\addplot coordinates { (1,0.450) (2,0.294) (4,0.242) (8,0.248) (16,0.245)  };
-\addplot coordinates { (1,0.46) (2,0.344) (4,0.260) (8,0.262) (16,0.258)  };
-\addplot coordinates { (1,1.120) (2,0.666) (4,0.453) (8,0.464) (16,0.454)  };
-\addplot coordinates { (1,1.138) (2,0.691) (4,0.476) (8,0.467) (16,0.465)  };
-\addlegendentry{Kernel 6 OpenMP}
-\addlegendentry{Kernel 6 POSIX}
-
-\addlegendentry{Kernel 12 OpenMP}
-\addlegendentry{Kernel 12 POSIX}
-\end{axis}
-\end{tikzpicture}
-
-    
-\item \textbf{Imagen de 1080p}
-
-
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 1080p},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-]
-\addplot coordinates { (1,0.895) (2,0.543) (4,0.392) (8,0.393) (16,0.394)  };
-\addplot coordinates { (1,0.937) (2,0.574) (4,0.408) (8,0.390) (16,0.411)  };
-\addplot coordinates { (1,2.699) (2,1.515) (4,0.954) (8,0.924) (16,0.913)  };
-\addplot coordinates { (1,2.709) (2,1.512) (4,0.965) (8,0.929) (16,0.944)  };
-\addlegendentry{Kernel 6 OpenMP}
-\addlegendentry{Kernel 6 POSIX}
-\addlegendentry{Kernel 12 OpenMP}
-\addlegendentry{Kernel 12 POSIX}
-\end{axis}
-\end{tikzpicture}
-
-
-\item \textbf{Imagen de 4k}
-
-\begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,4,8,16},
-title={Time Response 4k},
-xlabel={Numero de hilos},
-ylabel={Tiempo},
-]
-\addplot coordinates { (1,9.273) (2,5.134) (4,3.574) (8,3.536) (16,3.587)  };
-\addplot coordinates { (1,9.306) (2,5.169) (4,3.519) (8,3.576) (16,3.561)  };
-\addplot coordinates { (1,32.137) (2,17.204) (4,10.662) (8,10.520) (16,10.426)  };
-\addplot coordinates { (1,32.182) (2,17.180) (4,10.654) (8,10.556) (16,10.418)  };
-\addlegendentry{Kernel 6 OpenMP}
-\addlegendentry{Kernel 6 POSIX}
-\addlegendentry{Kernel 12 OpenMP}
-\addlegendentry{Kernel 12 POSIX}
-\end{axis}
-\end{tikzpicture}
-
-
-\end{itemize}
-
-Como podemos observar en las gráficas existe cierta mejora usando el equivalente de POSIX en OpenMp aunque esta mejora es más evidente en resolución de imagenes pequeñas como la de 720p.\\
-La siguientes tablas ilustran lo anteriormente mencionado:\\
-\begin{table}[H]
-\centering
-    \begin{tabular}{ |c|c|c| } 
-\hline
-\multicolumn{3}{|c|}{\textbf{Diferencias entre POSIX Y OpenMP}} \\
-\hline
-\textbf{Hilos} & \textbf{Kernel 6} & \textbf{Kernel 12}\\
-\hline
-1 Hilo & 0,010 & 0,018\\
- \hline
-2 Hilos & 0,050 & 0,025 \\ 
- \hline
-4 Hilos & 0,018 & 0,023 \\ 
- \hline
-8 Hilos & 0,014 & 0,003\\ 
- \hline
-16 Hilos & 0,013 & 0,011\\ 
-\hline
-\textbf{Promedio de diferencias} & 0,021 & 0,016\\ 
-\hline
-\end{tabular}
-\caption{Imagen de 720p}
-\end{table}
-
-\begin{table}[H]
-\centering
-    \begin{tabular}{ |c|c|c| } 
-\hline
-\multicolumn{3}{|c|}{\textbf{Diferencias entre POSIX Y OpenMP}} \\
-\hline
-\textbf{Hilos} & \textbf{Kernel 6} & \textbf{Kernel 12}\\
-\hline
-1 Hilo & 0,042 & 0,01\\
- \hline
-2 Hilos & 0,031 & -0,003 \\ 
- \hline
-4 Hilos & 0,016 & 0,011 \\ 
- \hline
-8 Hilos & -0,003 & 0,005\\ 
- \hline
-16 Hilos & 0,017 & 0,031\\ 
-\hline
-\textbf{Promedio de diferencias} & 0,0206 & 0,0108\\ 
-\hline
-\end{tabular}
-\caption{Imagen de 1080p}
-\end{table}
-
-\begin{table}[H]
-\centering
-    \begin{tabular}{ |c|c|c| } 
-\hline
-\multicolumn{3}{|c|}{\textbf{Diferencias entre POSIX Y OpenMP}} \\
-\hline
-\textbf{Hilos} & \textbf{Kernel 6} & \textbf{Kernel 12}\\
-\hline
-1 Hilo & 0,042 & 0,01\\
- \hline
-2 Hilos & 0,035 & -0,024 \\ 
- \hline
-4 Hilos & -0,055 & 0,011 \\ 
- \hline
-8 Hilos & 0,040 & 0,036\\ 
- \hline
-16 Hilos & -0,026 & -0,008\\ 
-\hline
-\textbf{Promedio de diferencias} & 0,0054 & 0,0082\\ 
-\hline
-\end{tabular}
-\caption{Imagen de 4k}
-\end{table}
-
-En base a las anteriores tablas se  calcula la diferencia promedio entre la ejecución de POSIX y OpenMP en la paralelización del efecto difuminado para los kernel de 6 y 12 en el caso de la imagen de 720p es de 0,0185 segundos, en el caso de la imagen de 1080p es de 0,0157 segundos y en el caso de la imagen de 4k es de 0,0068 segundos. Por último cabe mencionar que la diferencia promedio global es de 0,01366666667 segundos
 
 \subsection{CUDA}
 Antes de mostrar los resultados obtenidos y compararlos con los que se obtuvieron al paralelizar el efecto difuso que se obtuvo con CUDA en comparación con los de CPU(POSIX Y OpenMP), es necesario decir que se corrio en el entorno de Google Colab. 
