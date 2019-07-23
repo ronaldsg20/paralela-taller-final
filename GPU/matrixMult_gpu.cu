@@ -68,7 +68,7 @@ __global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
         ini = tn;
         fin = tn+1;
     }
-    printf("Thread : %d - ini: %d - fin: %d \n",tn,ini,fin);
+    //printf("Thread : %d - ini: %d - fin: %d \n",tn,ini,fin);
     int i, j, k; 
     if(tn <*N){
         for (i = ini; i < fin; i++) { 
