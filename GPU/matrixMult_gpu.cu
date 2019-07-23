@@ -17,7 +17,7 @@ void readMatrix(char *filename, int **M, int N){
         return;
     } 
     char *record,*line;
-    char buffer[1024];
+    char buffer[2300];
     int i=0,j=0;
     while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL){
         j = 0;
