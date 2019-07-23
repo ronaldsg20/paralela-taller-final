@@ -17,7 +17,7 @@ void readMatrix(char *filename, int **M, int N){
         return;
     } 
     char *record,*line;
-    char buffer[5000];
+    char buffer[1024];
     int i=0,j=0;
     while((line=fgets(buffer,sizeof(buffer),fstream))!=NULL){
         j = 0;
@@ -43,13 +43,13 @@ void printMatrix(int **M, int N){
     printf("\n");
 }
 
-void multiplyMatrix(int A[][5000], int B[][5000], int C[][5000], int ini, int fin) 
+void multiplyMatrix(int A[][1024], int B[][1024], int C[][1024], int ini, int fin) 
 { 
     int i, j, k; 
     for (i = ini; i < fin; i++) { 
-        for (j = 0; j < 5000; j++) { 
+        for (j = 0; j < 1024; j++) { 
             C[i][j] = 0; 
-            for (k = 0; k < 5000; k++) 
+            for (k = 0; k < 1024; k++) 
                 C[i][j] += A[i][k]*B[k][j]; 
         } 
     } 
@@ -79,6 +79,7 @@ __global__ void multiplyMat(int *A,int *B, int *C,int *H,int *N){
         ini = tn;
         fin = tn+1;
     }
+    printf("Thread : %d - ini: %d - fin: %d \n",tn,ini,fin);
     int i, j, k; 
     if(tn <*N){
         for (i = ini; i < fin; i++) { 
@@ -180,8 +181,8 @@ int main(int argc, char **argv){
     }
 
     // Print matrix A and B
-    /* printMatrix(A, N);
-    printMatrix(B, N); */
+    printMatrix(A, N);
+    printMatrix(B, N);
   
     //Memcpy: Host to device
 
@@ -240,7 +241,7 @@ int main(int argc, char **argv){
     }
 
     //print results
-    /* printMatrix(C, N); */
+    printMatrix(C, N);
 
     // Write the matrix
     writeMatrix(argv[6], C, N);
