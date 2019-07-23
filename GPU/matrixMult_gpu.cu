@@ -9,8 +9,6 @@
  #include <cuda_runtime.h>
 // Global variables
 
-int
-
 void readMatrix(char *filename, int **M, int N){
     FILE *fstream = fopen(filename, "r");
     if(fstream == NULL){
