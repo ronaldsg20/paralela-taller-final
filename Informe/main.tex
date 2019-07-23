@@ -88,9 +88,9 @@ a dos matrices  de tamaño 16,y   se  lanzan 4 hilos entonces  el hilo 1 se le a
 Cada hilo  hace  la  multiplicación correspondiente generando en la matriz  producto la  fila que le corresponde
 
 \section{Experimentos y resultados.}
-\subsection{POSIX y OpenMP}
+\subsection{OpenMP}
 
-Antes de mostrar los resultados obtenidos y compararlos con los que se obtuvieron al paralelizar el efecto difuso con POSIX, es necesario dar a conocer las especificaciones correspondientes del ordenador donde corrio el algoritmo. Para esto se construyo la siguiente tabla resumiendo dicha información:
+Antes de mostrar los resultados obtenidos al parelizar la multiplicación  de matrices   con OpenMP, es necesario dar a conocer las especificaciones correspondientes del ordenador donde corrio el algoritmo. Para esto se construyo la siguiente tabla resumiendo dicha información:
 
 \begin{table}[H]
 \centering
@@ -263,30 +263,70 @@ Como podemos observar en las gráficas anteriores el speed up es el esperado ya 
 
 
 \subsection{CUDA}
-Antes de mostrar los resultados obtenidos y compararlos con los que se obtuvieron al paralelizar el efecto difuso que se obtuvo con CUDA en comparación con los de CPU(POSIX Y OpenMP), es necesario decir que se corrio en el entorno de Google Colab. 
+Antes de mostrar los resultados obtenidos y compararlos con los que se obtuvieron al paralelizar la   multiplicación de  matrices
+ por  medio de CPU(OpenMP), es necesario decir que se corrio en el entorno de Google Colab. 
 
 
 \subsubsection{Resultados}
-Como primera medida se utilizo el time response o tiempo de ejecución de un programa, donde para cada imagen se crearon sus corresponientes gráficas donde en eje horizontal se colocaron el tamaño del kernel que ejecutaba el programa y en el eje vertical el tiempo que tardo.\\
+Como primera medida se utilizo el time response o tiempo de ejecución de un programa, donde para cada matriz se crearon sus corresponientes gráficas donde en eje horizontal se colocaron el numero  de hilos que ejecutaba el programa y en el eje vertical el tiempo que tardo.\\
+Para facilidad  en la gráficas se utilizo la  siguiente nomenclatura\\
+
+\begin{table}[H]
+    \centering
+        \begin{tabular}{ |c|c| } 
+    \hline
+    \multicolumn{2}{|c|}{Nomenclatura} \\
+    \hline
+    Real & Equivalente\\
+     \hline
+     10 & 1 \\ 
+     \hline
+     20 & 2 \\ 
+     \hline
+     40 & 4\\ 
+     \hline
+     80 & 8\\ 
+     \hline
+     100  & 10 \\ 
+     \hline
+     200  & 12 \\ 
+     \hline
+     400  & 14 \\ 
+     \hline
+     600  & 16 \\ 
+     \hline
+     800  & 18 \\ 
+     \hline
+     1000  & 20 \\ 
+     \hline
+    \end{tabular}
+    \caption{Especificaciones del ordenador}
+    \end{table}
+
 A continuacion se presentan las gráficas correspondientes:
 \begin{itemize}
-    \item \textbf{Imagen de 720p}
+  
+    \item \textbf{Matrices de tamaño 8}
     
     \begin{tikzpicture}
-\begin{axis}[
-xticklabels={},
-extra x ticks={1,2,3,4,5,6,7,8,9,10,11,12,13,14},
-title={Time Response 720p},
-xlabel={Tamaño del kernel},
-ylabel={Tiempo},
-nodes near coords, 
- every node near coord/.append style={font=\tiny,yshift=-1.6pt},
- nodes near coords style={/pgf/number format/.cd,precision=3},
-]
-\addplot coordinates { (2,0.375) (3,0.355) (4,0.420) (4,0.383) (6,0.469) (7,0.396) (8,0.419) (9,0.417) (10,0.494) (11,0.492) (12,0.563) (13,0.560) (14,0.691)};
-\end{axis}
-\end{tikzpicture}
-
+        \begin{axis}[
+        xticklabels={},
+        extra x ticks={1,2,4,8,10,12,14,16,18,20},
+        title={ Time Response 2,3 y 4},
+        xlabel={Numero de hilos},
+        ylabel={Tiempo},
+        nodes near coords, 
+         every node near coord/.append style={font=\tiny,yshift=-1.6pt},
+         nodes near coords style={/pgf/number format/.cd,precision=3},
+         ]
+        \addplot coordinates { (1,0.2) (2,0.194) (4,0.2) (8,0.199) (10,0.192) (12,0.196)  (14,0.196) (16,0.192) (18,0.191) (20,0.195)};
+        \addplot coordinates { (1,0.194) (2,0.191) (4,0.192) (8,0.193) (10,0.199) (12,0.197)  (14,0.191) (16,0.192) (18,0.190) (20,0.192)};
+       
+        \addlegendentry{Bloque 2}
+        \addlegendentry{Bloque 3}
+        \addlegendentry{Bloque 4}
+        \end{axis}
+        \end{tikzpicture}
 
 
 \item \textbf{Imagen de 1080p}
@@ -582,7 +622,7 @@ every node near coord/.append style={font=\tiny,yshift=-1.6pt},
 
 \section{Conclusiones}
 \begin{enumerate}
-    \item POSIX y OpemMP
+    \item OpemMP
             \begin{itemize}
           \item Entre mas grande es el kernel con el que se trabaja se demora un tiempo superior en realizar el efecto difuminado debido a que realiza mas operaciones al momento de calcular el promedio del kernel, haciendo que el costo computacional sea superior
           \item Como se observa en los resultados presentados en las tablas anteriores la mejora solo se aprecia que es significativa hasta los 4 hilos y considero que se debe a que el procesador donde se corrio el código  solo posee 4

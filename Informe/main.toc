@@ -3,7 +3,7 @@
 \contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {I-A}}Multiplicaci\IeC {\'o}n matricial}{1}% 
 \contentsline {section}{\numberline {II}Algoritmo del paralizaci\IeC {\'o}n.}{1}% 
 \contentsline {section}{\numberline {III}Experimentos y resultados.}{1}% 
-\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}POSIX y OpenMP}{1}% 
+\contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-A}}OpenMP}{1}% 
 \contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-A}1}Resultados}{2}% 
 \contentsline {subsection}{\numberline {\unhbox \voidb@x \hbox {III-B}}CUDA}{3}% 
 \contentsline {subsubsection}{\numberline {\unhbox \voidb@x \hbox {III-B}1}Resultados}{3}% 
